@@ -1,0 +1,2 @@
+# Wood_Tracking_Method
+Forest certification is becoming a significant indicator of corporate responsibility within the wood products industry. Blockchain technology can improve electronic traceability and ensure reliability, transparency, and security for certified raw materials and wood products. One of the significant challenges with tracking and verifying wood is finding affordable and feasible technology to do so. This use case will investigate if wood can be accurately tracked throughout the supply chain to ensure certification integrity. 
