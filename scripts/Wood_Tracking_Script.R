@@ -27,7 +27,7 @@ aSi <- as.factor(aMtdat$aSi)
 #LogCondition <- (M = Ci = Si)
 
 
-if (M == aM){
+LogCondition1 <- if (M == aM){
   print ("Accepted Microtag")
 } else {
   print ("Not Accepted")
@@ -87,18 +87,18 @@ board.verify <- {if(log.verify = BoardCondition1)
 
 
 
-Forester -> Log Contract -> Log Tokens: Tree species, location
-Sawmill -> Board Contract -> Board Tokens: Data from log token, quantity
-Lowes -> Lumber Contract -> Holds Board tokens
+#Forester -> Log Contract -> Log Tokens: Tree species, location
+#Sawmill -> Board Contract -> Board Tokens: Data from log token, quantity
+#Lowes -> Lumber Contract -> Holds Board tokens
 
-The token ID will be composed with the following information: 
+#The token ID will be composed with the following information: 
   
-  Cu <- (input units)
-Ci <- (input criteria)
-Ta <- (token amount)
-To   <- (token owner) ? token creator 
+#Cu <- (input units)
+#Ci <- (input criteria)
+#Ta <- (token amount)
+#To  <- (token owner) ? token creator 
 
-Token ID [Ta, Cu, Ci, To, date/time stamp]: 
+#Token ID [Ta, Cu, Ci, To, date/time stamp]: 
   
   
 
