@@ -25,7 +25,7 @@ aSi <- as.factor(aMtdat$aSi)
 
 
 #LogCondition <- (M = Ci = Si)
-
+LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
 
 LogCondition1 <- if (M == aM){
   print ("Accepted Microtag")
@@ -46,7 +46,7 @@ if (Ci == aCi){
 }
 
 
-LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
+
 LogCondition2 <- (m = Ci != Si)
 LogCondition3 <- (m != Ci = Si)
 LogCondition4 <- (m != Ci != Si)
