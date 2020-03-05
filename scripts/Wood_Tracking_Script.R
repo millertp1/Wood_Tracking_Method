@@ -15,12 +15,12 @@ View(aMtdat)
 Mtdat <- read_excel("data/Microtag_data.xlsx")
 View(Mtdat)
 
-M <-Mtdat$M
-aM <-aMtdat$aM
-Ci <- Mtdat$Ci
-aCi <- aMtdat$aCi
-Si <- Mtdat$Si
-aSi <- aMtdat$aSi
+M <- as.factor(Mtdat$M)
+aM <- as.factor(aMtdat$aM)
+Ci <- as.factor(Mtdat$Ci)
+aCi <- as.factor(aMtdat$aCi)
+Si <- as.factor(Mtdat$Si)
+aSi <- as.factor(aMtdat$aSi)
 
 
 
@@ -39,17 +39,14 @@ if (Si == aSi){
   print ("Not Accepted")
 }
 
-if (matches[[3]][1] > matches[[3]][2]){
-  print ("Win")
+if (Ci == aCi){
+  print ("Accepted Criteria")
 } else {
-  print ("Loss")
+  print ("Not Accepted Criteria")
 }
 
+
 LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
-                  
-
-
-
 LogCondition2 <- (m = Ci != Si)
 LogCondition3 <- (m != Ci = Si)
 LogCondition4 <- (m != Ci != Si)
