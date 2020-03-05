@@ -1,4 +1,4 @@
-#m <- (microtag scan data)
+#M <- (microtag scan data)
 #Ci <- (input criteria)
 #Si <- (supplier identifier)
 #Ri <- (required inputs)
@@ -6,7 +6,50 @@
 
 #Ci = species, gps
 
-LogCondition1 <- (m = Ci = Si)
+
+library(readxl)
+
+aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+View(aMtdat)
+
+Mtdat <- read_excel("data/Microtag_data.xlsx")
+View(Mtdat)
+
+M <-Mtdat$M
+aM <-aMtdat$aM
+Ci <- Mtdat$Ci
+aCi <- aMtdat$aCi
+Si <- Mtdat$Si
+aSi <- aMtdat$aSi
+
+
+
+#LogCondition <- (M = Ci = Si)
+
+
+if (M == aM){
+  print ("Accepted Microtag")
+} else {
+  print ("Not Accepted")
+}
+
+if (Si == aSi){
+  print ("Accepted Supplier Identifier")
+} else {
+  print ("Not Accepted")
+}
+
+if (matches[[3]][1] > matches[[3]][2]){
+  print ("Win")
+} else {
+  print ("Loss")
+}
+
+LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
+                  
+
+
+
 LogCondition2 <- (m = Ci != Si)
 LogCondition3 <- (m != Ci = Si)
 LogCondition4 <- (m != Ci != Si)
