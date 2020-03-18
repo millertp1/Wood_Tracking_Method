@@ -8,12 +8,13 @@
 
 
 library(readxl)
-
-aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+aMtdat <- read_excel("R/R_methods/Wood_Tracking_Method/data/Accepted_microtag.xlsx")
 View(aMtdat)
 
-Mtdat <- read_excel("data/Microtag_data.xlsx")
+Mtdat <- read_excel("R/R_methods/Wood_Tracking_Method/data/Forester_data.xlsx")
 View(Mtdat)
+
+rm(Microtag_data)
 
 M <- as.factor(Mtdat$M)
 aM <- as.factor(aMtdat$aM)
