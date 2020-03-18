@@ -8,13 +8,13 @@
 
 
 library(readxl)
-aMtdat <- read_excel("R/R_methods/Wood_Tracking_Method/data/Accepted_microtag.xlsx")
+aMtdat <- read_excel("data/Accepted_microtag.xlsx")
 View(aMtdat)
 
-Mtdat <- read_excel("R/R_methods/Wood_Tracking_Method/data/Forester_data.xlsx")
+Mtdat <- read_excel("data/Forester_data.xlsx")
 View(Mtdat)
 
-rm(Microtag_data)
+
 
 M <- as.factor(Mtdat$M)
 aM <- as.factor(aMtdat$aM)
@@ -46,7 +46,10 @@ if (Ci == aCi){
   print ("Not Accepted Criteria")
 }
 
+which( outer(Mtdat$1, aMtdat$1, "=="), arr.ind=TRUE)
 
+match(
+  interaction( Mtdat$M, aMtdat$M)
 
 LogCondition2 <- (m = Ci != Si)
 LogCondition3 <- (m != Ci = Si)
