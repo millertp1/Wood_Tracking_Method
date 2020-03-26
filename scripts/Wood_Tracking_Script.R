@@ -6,16 +6,17 @@
 
 #Ci = species, gps
 
-
+#Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
 aMtdat <- read_excel("data/Accepted_microtag.xlsx")
 View(aMtdat)
 
+#Read in Mircotag scan, the microtag layers, input criteria and supplier indentifer
 Mtdat <- read_excel("data/Forester_data.xlsx")
 View(Mtdat)
 
 
-
+#Set columns as factors 
 M <- as.factor(Mtdat$M)
 aM <- as.factor(aMtdat$aM)
 Ci <- as.factor(Mtdat$Ci)
@@ -23,7 +24,7 @@ aCi <- as.factor(aMtdat$aCi)
 Si <- as.factor(Mtdat$Si)
 aSi <- as.factor(aMtdat$aSi)
 
-
+#First step is satisfying log criteria, the microtag data must match teh approved microtag criteria
 
 #LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
@@ -31,46 +32,27 @@ LogCondition2 <- (m = Ci != Si)
 LogCondition3 <- (m != Ci = Si)
 LogCondition4 <- (m != Ci != Si)
 
-
-
-LogCondition1 <- if (M %in% aM) {
-  print ("Accepted Microtag")
-} else {
-  print ("Not Accepted")
-}
-
+#M <- (microtag scan data)
 M %in% aM
 which(M %in% aM)
+ifelse (M %in% aM,"Accepted Microtag","Not Microtag")
 
-
-
-if (Si %in% aSi){
-  print ("Accepted Supplier Identifier")
-} else {
-  print ("Not Accepted")
-}
-
-Si %in% aSi
-which(Si %in% aSi)
-
-ifelse(condition, do_if_true, do_if_false)
-
-ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
-
-
-
+#Ci <- (input criteria)
 Ci %in% aCi
 which(Ci %in% aCi)
-
+ifelse(condition, do_if_true, do_if_false)
 ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
 
-BoardCondition1 <- (m = Ci = Ri = Rs)
-BoardCondition2 <- (m != Ci = Ri = Rs)
-BoardCondition3 <- (m = Ci != Ri = Rs)
-BoardCondition4 <- (m = Ci = Ri != Rs)
-BoardCondition5 <- (m = Ci != Ri != Rs)
-BoardCondition6 <- (m != Ci = Ri != Rs)
-BoardCondition7 <- (mm != Ci != Ri != Rs)
+#Si <- (supplier identifier)
+Si %in% aSi
+which(Si %in% aSi)
+ifelse (Si %in% aSi,"Accepted Supplier Identifier","Not Accepted")
+
+#Check Log Condition
+LogCondition1 <- ifelse (M %in% aM & Si %in% aSi & Ci %in% aCi, "Log Condition Met", "Revert") 
+LogCondition1                        
+                     
+#Non-Log Condition 1 will revert
 
 log.verify <- {if(LogCondition1)
   stop("log token")
@@ -81,6 +63,18 @@ log.verify <- {if(LogCondition1)
   else if(LogCondition4)
     stop("FAIL")
 }
+
+
+
+BoardCondition1 <- (m = Ci = Ri = Rs)
+BoardCondition2 <- (m != Ci = Ri = Rs)
+BoardCondition3 <- (m = Ci != Ri = Rs)
+BoardCondition4 <- (m = Ci = Ri != Rs)
+BoardCondition5 <- (m = Ci != Ri != Rs)
+BoardCondition6 <- (m != Ci = Ri != Rs)
+BoardCondition7 <- (mm != Ci != Ri != Rs)
+
+
 
 board.verify <- {if(log.verify = BoardCondition1)
   stop("board token")
