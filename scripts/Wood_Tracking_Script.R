@@ -25,35 +25,44 @@ aSi <- as.factor(aMtdat$aSi)
 
 
 
-#LogCondition <- (M = Ci = Si)
+#LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
+LogCondition2 <- (m = Ci != Si)
+LogCondition3 <- (m != Ci = Si)
+LogCondition4 <- (m != Ci != Si)
 
-LogCondition1 <- if (M == aM){
+
+
+LogCondition1 <- if (M %in% aM) {
   print ("Accepted Microtag")
 } else {
   print ("Not Accepted")
 }
 
-if (Si == aSi){
+M %in% aM
+which(M %in% aM)
+
+
+
+if (Si %in% aSi){
   print ("Accepted Supplier Identifier")
 } else {
   print ("Not Accepted")
 }
 
-if (Ci == aCi){
-  print ("Accepted Criteria")
-} else {
-  print ("Not Accepted Criteria")
-}
+Si %in% aSi
+which(Si %in% aSi)
 
-which( outer(Mtdat$1, aMtdat$1, "=="), arr.ind=TRUE)
+ifelse(condition, do_if_true, do_if_false)
 
-match(
-  interaction( Mtdat$M, aMtdat$M)
+ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
 
-LogCondition2 <- (m = Ci != Si)
-LogCondition3 <- (m != Ci = Si)
-LogCondition4 <- (m != Ci != Si)
+
+
+Ci %in% aCi
+which(Ci %in% aCi)
+
+ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
 
 BoardCondition1 <- (m = Ci = Ri = Rs)
 BoardCondition2 <- (m != Ci = Ri = Rs)
