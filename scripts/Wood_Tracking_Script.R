@@ -27,15 +27,15 @@ aSi <- as.factor(aMtdat$aSi)
 #First step is satisfying log criteria, the microtag data must match teh approved microtag criteria
 
 #LogCondition <- (aM, aCi, aSi)
-LogCondition1 <- (M = aM & Ci = aCi & Si = aSi) 
-LogCondition2 <- (m = Ci != Si)
-LogCondition3 <- (m != Ci = Si)
-LogCondition4 <- (m != Ci != Si)
+LogCondition1 <- (M %in% aM & Si %in% aSi & Ci %in% aCi) 
+LogCondition2 <- (M %!in% aM & Si %in% aSi & Ci %in% aCi) 
+LogCondition3 <- (M = aM & Ci != aCi & Si = aSi) 
+LogCondition4 <- (M = aM & Ci = aCi & Si != aSi) 
 
 #M <- (microtag scan data)
 M %in% aM
 which(M %in% aM)
-ifelse (M %in% aM,"Accepted Microtag","Not Microtag")
+ifelse (M %in% aM,"Accepted Microtag","Not Accepted Microtag")
 
 #Ci <- (input criteria)
 Ci %in% aCi
@@ -50,20 +50,35 @@ ifelse (Si %in% aSi,"Accepted Supplier Identifier","Not Accepted")
 
 #Check Log Condition
 LogCondition1 <- ifelse (M %in% aM & Si %in% aSi & Ci %in% aCi, "Log Condition Met", "Revert") 
-LogCondition1                        
+LogCondition1                       
                      
-#Non-Log Condition 1 will revert
+#Non-Log Condition 1 will fail/revert
+'%!in%' <- function(x,y)!('%in%'(x,y))
 
-log.verify <- {if(LogCondition1)
+LogCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
+LogCondition2
+
+LogCondition3 <- ifelse ( Si %!in% aSi, "Failed Supplier Identifier", "Revert") 
+LogCondition3
+
+LogCondition4 <- ifelse (Ci %!in% aCi, "Failed Input Criteria", "Revert") 
+LogCondition4
+
+LogCondition5 <- ifelse (M %!in% aM | Si %!in% aSi | Ci %!in% aCi, "Failed Microtag or Supplier or Input Criteria", "Revert") 
+LogCondition5
+
+
+log.verify <- {ifelse(LogCondition1)
   stop("log token")
-  else if(LogCondition2)
+    if(LogCondition2)
     stop("FAIL")
-  else if(LogCondition3)
+  if(LogCondition3)
     stop("FAIL")
-  else if(LogCondition4)
+  if(LogCondition4)
     stop("FAIL")
 }
 
+log.verify
 
 
 BoardCondition1 <- (m = Ci = Ri = Rs)
