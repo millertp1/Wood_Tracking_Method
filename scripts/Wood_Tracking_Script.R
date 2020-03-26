@@ -100,6 +100,11 @@ log.verify <- {ifelse(M %in% aM,  Si %in% aSi, Ci %in% aCi)
 log.verify (M %in% aM & Si %in% aSi & Ci %in% aCi)
 
 
+
+
+
+
+#BOARD CONDITIONS MIMIC FUNCTIONS FROM LOG CONDITIONS 
 BoardCondition1 <- (m = Ci = Ri = Rs)
 BoardCondition2 <- (m != Ci = Ri = Rs)
 BoardCondition3 <- (m = Ci != Ri = Rs)
