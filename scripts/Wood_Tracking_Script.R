@@ -24,7 +24,7 @@ aCi <- as.factor(aMtdat$aCi)
 Si <- as.factor(Mtdat$Si)
 aSi <- as.factor(aMtdat$aSi)
 
-#First step is satisfying log criteria, the microtag data must match teh approved microtag criteria
+#First step is satisfying log criteria, the microtag data must match the approved microtag criteria
 
 #LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M %in% aM & Si %in% aSi & Ci %in% aCi) 
@@ -67,18 +67,37 @@ LogCondition4
 LogCondition5 <- ifelse (M %!in% aM | Si %!in% aSi | Ci %!in% aCi, "Failed Microtag or Supplier or Input Criteria", "Revert") 
 LogCondition5
 
+#STUCK LOOK AT PICTURES IN PHONE
 
-log.verify <- {ifelse(LogCondition1)
-  stop("log token")
-    if(LogCondition2)
-    stop("FAIL")
-  if(LogCondition3)
-    stop("FAIL")
-  if(LogCondition4)
-    stop("FAIL")
+log.verify <- function (M %in% aM & Si %in% aSi & Ci %in% aCi)
+ 
+
+log.verify <- function(M %in% aM,  Si %in% aSi, Ci %in% aCi) {
+  if(function(LogCondition1))
+    print("Log Token")
+  if(function (LogCondition2)) 
+    print("Revert")
+  if(function (LogCondition3))
+    return("Revert")
+  if(function (LogCondition4)) 
+    return("Revert")
+  else stop("Revert"))
 }
 
-log.verify
+
+
+#2nd attempt to make log verification
+log.verify <- {ifelse(M %in% aM,  Si %in% aSi, Ci %in% aCi)
+  print("log token")
+    if(LogCondition2)
+    print("FAIL")
+  if(LogCondition3)
+    print("FAIL")
+  if(LogCondition4)
+    print("FAIL")
+}
+
+log.verify (M %in% aM & Si %in% aSi & Ci %in% aCi)
 
 
 BoardCondition1 <- (m = Ci = Ri = Rs)
