@@ -4,8 +4,13 @@
 #Ri <- (required inputs)
 #Rs <- (required supplier)
 
+#CREATE DATA FOR BOARD TOKEN FUNCTIONS
 
-#BOARD CONDITIONS MIMIC FUNCTIONS FROM LOG CONDITIONS 
+
+
+
+
+#BOARD CONDITIONS 
 BoardCondition1 <- (m = Ci = Ri = Rs)
 BoardCondition2 <- (m != Ci = Ri = Rs)
 BoardCondition3 <- (m = Ci != Ri = Rs)
@@ -14,7 +19,30 @@ BoardCondition5 <- (m = Ci != Ri != Rs)
 BoardCondition6 <- (m != Ci = Ri != Rs)
 BoardCondition7 <- (mm != Ci != Ri != Rs)
 
+M %in% aM & Si %in% aSi & Ci %in% aCi
 
+#M <- (microtag scan data)
+M %in% aM
+which(M %in% aM)
+ifelse (M %in% aM,"Accepted Microtag","Not Accepted Microtag")
+
+#Ci <- (input criteria)
+Ci %in% aCi
+which(Ci %in% aCi)
+ifelse(condition, do_if_true, do_if_false)
+ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
+
+#Ri <- (required inputs)
+Ri %in% aRi
+which(Ri %in% aRi)
+ifelse(condition, do_if_true, do_if_false)
+ifelse (Ri %in% aRi,"Accepted Required Inputs","Not Accepted Required Inputs")
+
+#Rs <- (required supplier)
+Rs %in% aRs
+which(Rs %in% aRs)
+ifelse(condition, do_if_true, do_if_false)
+ifelse (Rs %in% aRs,"Correct Number of Required Suppliers","Incorrect Number of Required Suppliers")
 
 board.verify <- {if(log.verify = BoardCondition1)
   stop("board token")
