@@ -69,7 +69,7 @@ LogCondition5
 
 #STUCK LOOK AT PICTURES IN PHONE
 
-log.verify <- function (M %in% aM & Si %in% aSi & Ci %in% aCi)
+log.verify <- function ()
  
 
 log.verify <- function(M %in% aM,  Si %in% aSi, Ci %in% aCi) {
@@ -87,9 +87,9 @@ log.verify <- function(M %in% aM,  Si %in% aSi, Ci %in% aCi) {
 
 
 #2nd attempt to make log verification
-log.verify <- {ifelse(M %in% aM,  Si %in% aSi, Ci %in% aCi)
+log.verify <- {ifelse(LogCondition1,== "Log Condition Met")
   print("log token")
-    if(LogCondition2)
+    if(=="Revert")
     print("FAIL")
   if(LogCondition3)
     print("FAIL")
