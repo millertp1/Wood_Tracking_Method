@@ -8,11 +8,11 @@
 
 #Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
-aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
 View(aMtdat)
 
 #Read in Mircotag scan, the microtag layers, input criteria and supplier indentifer
-Mtdat <- read_excel("data/Forester_data.xlsx")
+Mtdat <- read_excel("data/Forester_Mircotag_Scan.xlsx")
 View(Mtdat)
 
 
