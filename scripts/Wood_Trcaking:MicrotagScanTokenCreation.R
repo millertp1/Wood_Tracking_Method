@@ -12,6 +12,7 @@ View(mToken)
 
 
 mTokenScan <- mToken
+#Create key from mTokenKey, creating a data frame of the accepted criteria, represnted by the letter variables. 
 TokenScanKey <- data.frame(letters = c('B','R','N','P','A'), description = c('aMicrotag', 'aMicrotag', 'aCriteria', 'aCriteria', 'aSupplier'))
 TokenScanKey
 mTokenScan
@@ -31,36 +32,23 @@ LogToken_Verify <- function(mTokenScan, TokenScanKey) {
 
 LogToken_Verify(mTokenScan, TokenScanKey)
 
-tree_file<- c('MGYT', 'RMBT', 'GNRT', 'GMRT')
-sapply(tree_file, function(x) lookup_description(x,key))
+mTokenScan1<- c('YMD', 'RPA', 'BNC', 'RPA')
+sapply(mTokenScan1, function(x) LogToken_Verify(x,TokenScanKey))
 
 
 
-log.verify <- function ()
-  log.verify <- function() {
-    if(function(LogCondition1))
-      print("Log Token")
-    if(function (LogCondition2)) 
+
+
+
+Create.Token <- ifelse(function(sapply(mTokenScan1, function(x) LogToken_Verify(x,TokenScanKey)))) {
+    if("aMicrotag" & "aCriteria" & "aSupplier"))
+      create("Log Token")
+    else("NA") 
       print("Revert")
-    if(function (LogCondition3))
-      return("Revert")
-    if(function (LogCondition4)) 
-      return("Revert")
-    else stop("Revert"))
-  }
-
-
-
-#2nd attempt to make log verification
-log.verify <- {ifelse(LogCondition1,== "Log Condition Met")
-  print("log token")
-  if(=="Revert")
-    print("FAIL")
-  if(LogCondition3)
-    print("FAIL")
-  if(LogCondition4)
-    print("FAIL")
+  
 }
+
+
 
 
 
