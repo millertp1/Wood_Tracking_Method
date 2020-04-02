@@ -6,48 +6,47 @@ mTokenKey <- read_excel("data/MicrotagScan_TokenKey.xlsx",
 View(mTokenKey)
 
 #Read in Microtag Scan data for token verification, this is  the foresters QR code Microtaggnant scan data entry, it is a condensed version of the Microtag Scan data. First letter corresponds to  the three letter combo of M. Second letter coreesponds to the two letter combo Ci. The third letter corresponds to the number Si.  
-mToken <- read_excel("data/Microtagscan_Token.xlsx", 
-                                 col_names = FALSE)
-View(mToken)
+mBoardToken <- read_excel("data/Microtagscan_BoardToken.xlsx", 
+                          col_names = FALSE)
+
+View(mBoardToken )
 
 
-mTokenScan <- mToken
+
 #Create key from mTokenKey, creating a data frame of the accepted criteria, represnted by the letter variables. 
-TokenScanKey <- data.frame(letters = c('B','R','N','P','A'), description = c('aMicrotag', 'aMicrotag', 'aCriteria', 'aCriteria', 'aSupplier'))
+TokenScanKey <- data.frame(letters = c('B','R','N','P','A', 'K', 'L', 'U'), description = c('aMicrotag', 'aMicrotag', 'aCriteria', 'aCriteria', 'aSupplier', 'aRequired Inputs','aRequired Inputs', 'aRequired Suppliers'))
 TokenScanKey
-mTokenScan
-mTokenScan<- as.character(mTokenScan)
-unlist(strsplit(mTokenScan, split = ''))
-indices <- match(unlist(strsplit(mTokenScan, split = '')), TokenScanKey$letters)
+mBoardToken 
+mBoardToken <- as.character(mBoardToken)
+unlist(strsplit(mBoardToken, split = ''))
+indices <- match(unlist(strsplit(mBoardToken , split = '')), TokenScanKey$letters)
 indices
 TokenScanKey$description[indices]
-tScan_code<- unlist(strsplit(mTokenScan, ''))
+tbScan_code<- unlist(strsplit(mBoardToken , ''))
 
 
-LogToken_Verify <- function(mTokenScan, TokenScanKey) {
-  tScan_code<- unlist(strsplit(mTokenScan, ''))
+BoardToken_Verify <- function(mBoardToken, TokenScanKey) {
+  tbScan_code<- unlist(strsplit(mBoardToken, ''))
   indices <- match( tScan_code, TokenScanKey$letters)
   return(TokenScanKey$description[indices])
 }
 
-LogToken_Verify(mTokenScan, TokenScanKey)
+BoardToken_Verify(mBoardToken, TokenScanKey)
 
-mTokenScan1<- c('YMD', 'RPA', 'BNC', 'RPA')
-sapply(mTokenScan1, function(x) LogToken_Verify(x,TokenScanKey))
+bTokenScan1<- c('YMDKU', 'RPAKU', 'BNCKV', 'RPALU')
+sapply(bTokenScan1, function(x) BoardToken_Verify(x,TokenScanKey))
 
+tbCreation<-sapply(mBoardToken, function(x) BoardToken_Verify(x,TokenScanKey))
 
-
-
-
-
-Create.Token <- ifelse(function(sapply(mTokenScan1, function(x) LogToken_Verify(x,TokenScanKey)))) {
-    if("aMicrotag" & "aCriteria" & "aSupplier"))
-      create("Log Token")
-    else("NA") 
-      print("Revert")
-  
+if(tCreation =="aMicrotag" & "aCriteria" & "aSupplier") {
+  print(token)
 }
 
+#Scan that has accepted microtag scan, criteria and supplier will be 
+
+ 
+  
+#"aMicrotag" & "aCriteria" & "aSupplier"
 
 
 
