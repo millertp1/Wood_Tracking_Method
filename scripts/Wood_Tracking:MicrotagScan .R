@@ -1,10 +1,5 @@
-#M <- (microtag scan data)
-#Ci <- (input criteria)
-#Si <- (supplier identifier)
-#Ri <- (required inputs)
-#Rs <- (required supplier)
 
-#Ci = species, gps
+
 
 #Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
@@ -14,6 +9,11 @@ View(aMtdat)
 #Read in Mircotag scan, the microtag layers, input criteria and supplier indentifer
 Mtdat <- read_excel("data/Forester_Mircotag_Scan.xlsx")
 View(Mtdat)
+
+
+#M <- (microtag scan data)
+#Ci <- (input criteria)
+#Si <- (supplier identifier)
 
 
 #Set columns as factors 

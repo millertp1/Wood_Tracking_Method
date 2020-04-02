@@ -1,14 +1,14 @@
-#M <- (microtag scan data)
-#Ci <- (input criteria)
-#Si <- (supplier identifier)
-#Ri <- (required inputs)
-#Rs <- (required supplier)
+
 
 #CREATE DATA FOR BOARD TOKEN FUNCTIONS
 library(readxl)
 aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
 log_board <- read_excel("data/Board_TokenConditions_Sawmill.xlsx")
 
+#M <- (microtag scan data)
+#Ci <- (input criteria)
+#Ri <- (required inputs)
+#Rs <- (required supplier)
 
 M <- as.factor(log_board$M)
 aM <- as.factor(aMtdat$aM)
@@ -62,18 +62,22 @@ BoardCondition1
 #Non-Log Condition 1 will fail/revert
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
-LogCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
-LogCondition2
+BoardCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
+BoardCondition2
 
-LogCondition3 <- ifelse ( Si %!in% aSi, "Failed Supplier Identifier", "Revert") 
-LogCondition3
+BoardCondition3 <- ifelse (Ri %!in% aRi, "Failed Required Inputs", "Revert") 
+BoardCondition3
 
-LogCondition4 <- ifelse (Ci %!in% aCi, "Failed Input Criteria", "Revert") 
-LogCondition4
+BoardCondition4 <- ifelse (Ci %!in% aCi, "Failed Input Criteria", "Revert") 
+BoardCondition4 
 
-LogCondition5 <- ifelse (M %!in% aM | Si %!in% aSi | Ci %!in% aCi, "Failed Microtag or Supplier or Input Criteria", "Revert") 
-LogCondition5
-board.verify <- {if(log.verify = BoardCondition1)
+BoardCondition5 <- ifelse (Rs %!in% aRs, "Failed Required Suppliers", "Revert") 
+BoardCondition5 
+
+
+
+
+#board.verify <- {if(log.verify = BoardCondition1)
   stop("board token")
   else if(log.verify = BaordCondition2)
     stop("Accept Token")
