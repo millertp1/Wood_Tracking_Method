@@ -7,9 +7,6 @@
 #CREATE DATA FOR BOARD TOKEN FUNCTIONS
 
 
-
-
-
 #BOARD CONDITIONS 
 BoardCondition1 <- (m = Ci = Ri = Rs)
 BoardCondition2 <- (m != Ci = Ri = Rs)
