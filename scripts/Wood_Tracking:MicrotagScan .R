@@ -67,3 +67,9 @@ LogCondition4
 LogCondition5 <- ifelse (M %!in% aM | Si %!in% aSi | Ci %!in% aCi, "Failed Microtag or Supplier or Input Criteria", "Revert") 
 LogCondition5
 
+LogCondition1 
+LogCondition2 
+LogCondition3 
+LogCondition4  
+LogCondition5
+
