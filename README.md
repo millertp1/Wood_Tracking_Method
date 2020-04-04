@@ -1,4 +1,5 @@
-# Wood_Tracking_Method
+Wood Tracking Method
+
 Forest certification is becoming a significant indicator of corporate responsibility within the wood products industry. Blockchain technology can improve electronic traceability and ensure reliability, transparency, and security for certified raw materials and wood products. One of the significant challenges with tracking and verifying wood is finding affordable and feasible technology to do so. This use case will investigate if wood can be accurately tracked throughout the supply chain to ensure certification integrity. 
 
  
@@ -14,15 +15,24 @@ The microtaggant paint scans from both the forester and sawmill (data/Forester_M
 
 The tracking process begins with script: 
 
-Wood_Tracking:MicrotagScan.R - The initial microtaggant QR code scan is done by the forester, which corresponds to the physical logs that have been cut. To meet the conditions of acceptable products in the supply chain, the QR code scan must satisfy 3 3 parameters of the token contract. Identified in the script
+Wood_Tracking:MicrotagScan.R - The initial microtaggant QR code scan is done by the forester, which corresponds to the physical logs that have been cut. To meet the conditions of acceptable products that can be entered into the supply chain, the QR code scan must satisfy 3 parameters of the token contract (Log Condition 1). 
+
+2. Once the microtaggant QR code is recorded and accepted, token contracts are created to represent batches of logs.  
+Token creation for logs with script: 
+
+Wood_Tracking: Log_TokenCreation.R - The microtaggant paint scan of the accpeted log batches will be matched against the token creation crieria, if the criteria isn't met the logs will be stored until the right quantity or paraemters are met for token creation. Using the data files data/Microtagscan_Token.xlsx and data/MicrotagScan_TokenKey.xlsx
+
+
+
+The physical logs are transported to the lumber yard. The created token batch is sent to the sawmill through the execution of the transfer contract function.
 
 
 
 
 
-The forester supply chain partner will sign into the blockchain app via phone/tablet. The main          screen will have 3 options: "resource supplier", "producer" and "retail". The forester supply           chain partner will choose "resource supplier", the next screen will have names of approved              certified forest suppliers, and the user will choose their forest. The user will be prompted to         provide a user ID unique to the supplier. The user will verify the microtaggant and QR code by          scanning the QR code and verifying the microtaggant, which will satisfy 2 out of 3 parameters of         the token contract. The last part of the token contract will be verified with the blockchain's          app ability to record/verify the location of data inputs.
 
-2.	The resource supplier, the forester, creates a log contract once the microtaggant QR code is recorded, and the location is verified. Within the log contract, token contracts are created to represent batches of logs. The physical logs are transported to the lumber yard. The created token batch is sent to the sawmill through the execution of the transfer contract function.
+
+
 
 3.	The physical logs arrive at the sawmill. 
     a.	The producer supply chain partner will sign into the blockchain app via phone/tablet, main              screen and will have 3 options: "resource supplier", "producer" and "retail". The forester              supply chain partner will choose "producer", the next screen will have names of Lowe's                  producers, the user will choose their company.  The user will be prompted to provide a user ID          unique to the producer. The user will verify the microtaggant and QR code by scanning the QR           code and verifying the microtaggant, which will satisfy the recipe for the creation of a board           token contract.

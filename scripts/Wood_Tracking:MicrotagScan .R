@@ -1,5 +1,4 @@
 
-
 #Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
 aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
@@ -50,12 +49,18 @@ ifelse (Si %in% aSi,"Accepted Supplier Identifier","Not Accepted")
 #Check Log Condition, Log Condition 1 is the only acceptable condition to record and store logs in the blockcahin. 
 LogCondition1 <- ifelse (M %in% aM & Si %in% aSi & Ci %in% aCi, "Log Condition Met", "Revert") 
 LogCondition1                       
-                     
+ 
+#Entry 1 & 3 have met the conditions and can entered into the blockcahin and supply chain,. Entry 2 does not meet the criteria, continue with the other conditions to identify the failed criteria. 
+
+                    
 #Non-Log Condition 1 will fail/revert
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
 LogCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
 LogCondition2
+
+#It's been identified that the microtaggant paint did not meet criteria for entry 2. 
+
 
 LogCondition3 <- ifelse ( Si %!in% aSi, "Failed Supplier Identifier", "Revert") 
 LogCondition3
@@ -63,9 +68,7 @@ LogCondition3
 LogCondition4 <- ifelse (Ci %!in% aCi, "Failed Input Criteria", "Revert") 
 LogCondition4
 
-LogCondition5 <- ifelse (M %!in% aM | Si %!in% aSi | Ci %!in% aCi, "Failed Microtag or Supplier or Input Criteria", "Revert") 
-LogCondition5
-
+#CONDITION FUNCTIONS LISTED 
 LogCondition1 
 LogCondition2 
 LogCondition3 
