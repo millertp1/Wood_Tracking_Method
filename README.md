@@ -20,32 +20,19 @@ Wood_Tracking:MicrotagScan.R - The initial microtaggant QR code scan is done by 
 2. Once the microtaggant QR code is recorded and accepted, token contracts are created to represent batches of logs.  
 Token creation for logs with script: 
 
-Wood_Tracking: Log_TokenCreation.R - The microtaggant paint scan of the accpeted log batches will be matched against the token creation crieria, if the criteria isn't met the logs will be stored until the right quantity or paraemters are met for token creation. Using the data files data/Microtagscan_Token.xlsx and data/MicrotagScan_TokenKey.xlsx
+Wood_Tracking: Log_TokenCreation.R - The microtaggant paint scan of the accpeted log batches will be matched against the token creation crieria, if the criteria isn't met the logs will be stored until the right quantity or paraemters are met for log token creation. Using the data files data/Microtagscan_Token.xlsx and data/MicrotagScan_TokenKey.xlsx to build functions and key for matching scans with criteria. 
 
 
 
-The physical logs are transported to the lumber yard. The created token batch is sent to the sawmill through the execution of the transfer contract function.
+3. The physical logs are transported to the sawmill. The sawmill will verify the microtaggant and QR code by scanning the QR code and verifying the microtaggant paint, ensuring the batch that has arrived is the one that corresponds to the log token in the blockchain. If the microtaggant paint scan is different in any way, the sawmill will reject the load of logs. If the microtaggant paint scan matches the phyiscal logs are accepted and the log tokens are consumed from the forester to the sawmill.
 
+Script:
 
+Wood_Tracking:MicrotagScan.R - The second microtaggant QR code scan is done by the sawmill. To meet the conditions of acceptable products that can be accepted by the sawmill and remain in the supply chain, the QR code scan must satisfy the 3 parameters of Log Condition 1 to be accepted and consumed by the sawmill. 
 
+4.	The sawmill must define the number of logs used for production to create a batch of boards. The  accpeted log batches will be matched against the board token creation crieria, if the criteria isn't met the logs will be stored until the right quantity or paraemters are met for board token creation. Using the data files data/Microtagscan_BoardToken.xlsx and data/MicrotagScan_TokenKey.xlsx to build functions and key for matching scans with criteria.   
 
-
-
-
-
-
-3.	The physical logs arrive at the sawmill. 
-    a.	The producer supply chain partner will sign into the blockchain app via phone/tablet, main              screen and will have 3 options: "resource supplier", "producer" and "retail". The forester              supply chain partner will choose "producer", the next screen will have names of Lowe's                  producers, the user will choose their company.  The user will be prompted to provide a user ID          unique to the producer. The user will verify the microtaggant and QR code by scanning the QR           code and verifying the microtaggant, which will satisfy the recipe for the creation of a board           token contract.
-
-4.	The sawmill must define the number of logs used for production to create a batch of boards. The add-batch function will verify that the logs have been marked with microtaggant QR code, scanned, verified twice (1st scan at the forest and 2nd scan at the sawmill), and the initial scan was recorded in a certified origin. Upon the verification of origin and microtaggant QR code, the logs are consumed, the logs token's consumption function is called, the overall logs held in the forester's contract are reduced, and the sawmill now owns those corresponding tokens. 
-        a.	Token transfer the forester holds thirty units of logs, and the sawmill holds two units of              logs and four units of boards (30÷7= 4 whole units and 2 leftover)
-        
-        b.	Board units corresponding to the board tokens could be marked or labeled with generated QR              code from the blockchain web application, which will reveal components of the product, in               this case, the origin of the logs (a certified forest). 
-
-        c.	Each incoming log may produce a different number of boards depending on log shape and size,             thus potentially adding some complexity to the transition from log certification to board               certification. 
-
-5.	Board tokens are acquired by Lowe’s. Before the transaction is approved, the Lowe’s lumber contract verifies that the board token is a product of certified log tokens, resulting in the ability to verify the origin of the board or at least its certification status. 
-        a.	Physical boards are housed at Lowe's warehouse/store; the board tokens batch information can             be accessed on the blockchain web application. A label to be displayed on the price tag of              boards could have a generated QR code from the blockchain web application; this QR code will             reveal components of the product, in this case, the origin of the logs (a certified forest).
-        
+5.	Board tokens are acquired by the retailer. Before the transaction is approved, the retailers’s lumber contract verifies that the board token is a product of certified log tokens, resulting in the ability to verify the origin of the board or at least its certification status. 
+       
 
 
