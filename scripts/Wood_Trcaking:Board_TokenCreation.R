@@ -1,39 +1,39 @@
 #Log Token Function
 
 #Read in Token Key, this is the criteria that must be met from the foresters QR code Microtaggnant scan to create a log token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of aM. Second letter coreesponds to the two letter combo aCi. The third letter corresponds to the number aSi. 
-mTokenKey <- read_excel("data/Board_TokenKey.xlsx", 
-                        col_names = FALSE)
-View(mTokenKey)
+bTokenKey <- read_excel("data/Board_TokenKey.xlsx", 
+                        col_names = FALSE, col_types = c("text"))
+View(bTokenKey)
 
 #Read in Microtag Scan data for token verification, this is  the foresters QR code Microtaggnant scan data entry, it is a condensed version of the Microtag Scan data. First letter corresponds to  the three letter combo of M. Second letter coreesponds to the two letter combo Ci. The third letter corresponds to the number Si.  
-mBoardToken <- read_excel("data/Microtagscan_BoardToken.xlsx")
+BoardToken <- read_excel("data/Microtagscan_BoardToken.xlsx")
+View(BoardToken)
 
-View(mBoardToken )
 
 
 
 #Create key from mTokenKey, creating a data frame of the accepted criteria, represnted by the letter variables. 
 bTokenScanKey <- data.frame(letters = c('Y','R','N','L','A','U','V','D'), description = c('aMicrotag', 'aMicrotag', 'aCriteria', 'aCriteria', 'aSupplier', 'Create Board Token','Not Enough Inputs','aRequired Suppliers'))
 bTokenScanKey
-mBoardToken 
-mBoardToken <- as.character(mBoardToken)
-unlist(strsplit(mBoardToken, split = ''))
-indices <- match(unlist(strsplit(mBoardToken , split = '')), bTokenScanKey$letters)
+BoardToken 
+BoardToken <- as.character(BoardToken)
+unlist(strsplit(BoardToken, split = ''))
+indices <- match(unlist(strsplit(BoardToken , split = '')), bTokenScanKey$letters)
 indices
 bTokenScanKey$description[indices]
-tbScan_code<- unlist(strsplit(mBoardToken , ''))
+tbScan_code<- unlist(strsplit(BoardToken , ''))
 
 
-BoardToken_Verify <- function(mBoardToken, bTokenScanKey) {
-  tbScan_code<- unlist(strsplit(mBoardToken, ''))
+BoardToken_Verify <- function(BoardToken, bTokenScanKey) {
+  tbScan_code<- unlist(strsplit(BoardToken, ''))
   indices <- match( tScan_code, bTokenScanKey$letters)
   return(bTokenScanKey$description[indices])
 }
 
-BoardToken_Verify(mBoardToken, TokenScanKey)
+BoardToken_Verify(BoardToken, TokenScanKey)
 
 
-sapply(mBoardToken, function(x) BoardToken_Verify(x,bTokenScanKey))
+sapply(BoardToken, function(x) BoardToken_Verify(x,bTokenScanKey))
 
 
 
