@@ -1,6 +1,5 @@
 
 
-
 #Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
 aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
@@ -48,7 +47,7 @@ Si %in% aSi
 which(Si %in% aSi)
 ifelse (Si %in% aSi,"Accepted Supplier Identifier","Not Accepted")
 
-#Check Log Condition
+#Check Log Condition, Log Condition 1 is the only acceptable condition to record and store logs in the blockcahin. 
 LogCondition1 <- ifelse (M %in% aM & Si %in% aSi & Ci %in% aCi, "Log Condition Met", "Revert") 
 LogCondition1                       
                      

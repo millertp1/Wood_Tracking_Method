@@ -14,29 +14,29 @@ View(mBoardToken )
 
 
 #Create key from mTokenKey, creating a data frame of the accepted criteria, represnted by the letter variables. 
-TokenScanKey <- data.frame(letters = c('B','R','N','P','A', 'K', 'L', 'U'), description = c('aMicrotag', 'aMicrotag', 'aCriteria', 'aCriteria', 'aSupplier', 'aRequired Inputs','aRequired Inputs', 'aRequired Suppliers'))
-TokenScanKey
+bTokenScanKey <- data.frame(letters = c('B','R','N','P','A', 'K', 'L', 'U'), description = c('aMicrotag', 'aMicrotag', 'aCriteria', 'aCriteria', 'aSupplier', 'aRequired Inputs','aRequired Inputs', 'aRequired Suppliers'))
+bTokenScanKey
 mBoardToken 
 mBoardToken <- as.character(mBoardToken)
 unlist(strsplit(mBoardToken, split = ''))
-indices <- match(unlist(strsplit(mBoardToken , split = '')), TokenScanKey$letters)
+indices <- match(unlist(strsplit(mBoardToken , split = '')), bTokenScanKey$letters)
 indices
-TokenScanKey$description[indices]
+bTokenScanKey$description[indices]
 tbScan_code<- unlist(strsplit(mBoardToken , ''))
 
 
-BoardToken_Verify <- function(mBoardToken, TokenScanKey) {
+BoardToken_Verify <- function(mBoardToken, bTokenScanKey) {
   tbScan_code<- unlist(strsplit(mBoardToken, ''))
-  indices <- match( tScan_code, TokenScanKey$letters)
-  return(TokenScanKey$description[indices])
+  indices <- match( tScan_code, bTokenScanKey$letters)
+  return(bTokenScanKey$description[indices])
 }
 
 BoardToken_Verify(mBoardToken, TokenScanKey)
 
 bTokenScan1<- c('YMDKU', 'RPAKU', 'BNCKV', 'RPALU')
-sapply(bTokenScan1, function(x) BoardToken_Verify(x,TokenScanKey))
+sapply(bTokenScan1, function(x) BoardToken_Verify(x,bTokenScanKey))
 
-tbCreation<-sapply(mBoardToken, function(x) BoardToken_Verify(x,TokenScanKey))
+tbCreation<-sapply(mBoardToken, function(x) BoardToken_Verify(x,bTokenScanKey))
 
 if(tCreation =="aMicrotag" & "aCriteria" & "aSupplier") {
   print(token)

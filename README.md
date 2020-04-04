@@ -1,9 +1,11 @@
 # Wood_Tracking_Method
 Forest certification is becoming a significant indicator of corporate responsibility within the wood products industry. Blockchain technology can improve electronic traceability and ensure reliability, transparency, and security for certified raw materials and wood products. One of the significant challenges with tracking and verifying wood is finding affordable and feasible technology to do so. This use case will investigate if wood can be accurately tracked throughout the supply chain to ensure certification integrity. 
 
-The blockchain execution is illustrated and stored in the figures folder. 
+ 
 
 Pseudo-algorithm: If the microtaggant QR code matches with the input criteria and supplier identifier, then continue, if not revert. If the forester logged in the microtaggant QR code, then create associated log token. If the sawmill scans the microtaggant QR code, it accepts the log tokens, then continues. For the accepted tokens if they are equal to required number inputs and required number of supplier addresses, the recipe for the new product (board) is attained, sawmill creates board token. 
+
+The pseudo-algorithm blockchain execution is illustrated and stored in the figures folder.
 
 
 1.	Trees in a certified forest are harvested. The ends of the logs are tagged with a QR code using a stencil and microtaggant paint. The QR code will house tree location, season, and species. This will act as the certification necessary to create the log token.
