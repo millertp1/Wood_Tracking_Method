@@ -14,7 +14,7 @@ All data scans and criteria keys were simulated and can be modified for useer pr
 
 Initial microtaggant QR code scan with script: 
 
-Wood_Tracking:MicrotagScan.R - The initial microtaggant QR code scan is done by the forester, which corresponds to the physical logs that have been cut. To meet the conditions of acceptable products that can be entered into the supply chain, the QR code scan must satisfy 3 parameters of the token contract (Log Condition 1). 
+Wood_Tracking:Forester_MicrotagScan.R - The initial microtaggant QR code scan is done by the forester, which corresponds to the physical logs that have been cut. To meet the conditions of acceptable products that can be entered into the supply chain, the QR code scan must satisfy 3 parameters of the token contract (Log Condition 1). The microtaggant paint scans by the forester (Forester_Mircotag_Scan.xlsx) will be matched against the criteria set in the Microtag_Scan_Key.xlsx
 
 
 2. Once the microtaggant QR code is recorded and accepted, token contracts are created to represent batches of logs.  
@@ -28,7 +28,7 @@ Wood_Tracking: Log_TokenCreation.R - The microtaggant paint scan of the accpeted
 
 Second microtaggant QR code scan with script:
 
-Wood_Tracking:MicrotagScan.R - The second microtaggant QR code scan is done by the sawmill. To meet the conditions of acceptable products that can be accepted by the sawmill and remain in the supply chain, the QR code scan must satisfy the 3 parameters of Log Condition 1 to be accepted and consumed by the sawmill. The microtaggant paint scans from both the forester and sawmill (Forester_Mircotag_Scan.xlsx) will be matched against the criteria set in the Microtag_Scan_Key.xlsx
+Wood_Tracking:Sawmill_MicrotagScan.R - The second microtaggant QR code scan is done by the sawmill. To meet the conditions of acceptable products that can be accepted by the sawmill and remain in the supply chain, the QR code scan must satisfy the 3 parameters of Log Condition 1 to be accepted and consumed by the sawmill. The microtaggant paint scans by sawmill (Sawmill_Mircotag_Scan.xlsx) will be matched against the criteria set in the Microtag_Scan_Key.xlsx
 
 4.	The sawmill must define the number of logs used for production to create a batch of boards. The accpeted log batches will be matched against the board token creation crieria, if the criteria isn't met the logs will be stored until the right quantity or paraemters are met for board token creation.  
 
