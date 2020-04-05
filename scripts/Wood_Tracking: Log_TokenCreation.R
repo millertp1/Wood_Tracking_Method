@@ -1,8 +1,8 @@
 #Board Token Function
 
 #Read in Token Key, this is the criteria that must be met from the QR code Microtaggnant scan to create a board token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of aM. Second letter coreesponds to the two letter combo aCi. The third letter corresponds to the number aSi. 
-mTokenKey <- read_excel("data/MicrotagScan_TokenKey.xlsx", 
-                        col_names = FALSE, col_types = c("text"))
+mTokenKey <-read_excel("data/MicrotagScan_LogTokenKey.xlsx", 
+                            col_names = FALSE)
 View(mTokenKey)
 
 #Read in Microtag Scan data for token verification, this is  the sawmill QR code Microtaggnant scan data, it is a condensed version of the Microtag Scan data. First letter corresponds to  the three letter combo of M. Second letter coreesponds to the two letter combo Ci. The third letter corresponds to the number Si.  
@@ -35,4 +35,4 @@ LogToken_Verify(mTokenScan, TokenScanKey)
 #Function that can match any accepted scanned microtaggant paint scans of log batches aginst the token creation criteria.
 sapply(mToken, function(x) LogToken_Verify(x,TokenScanKey))
 
-#Batch 1 has met the token creation criteria, Batch 2's required inputs were not satisfied, the batch will stay in the blockcahin and at the foresters facility until the quantity is enough for the token creation criteria. The batch can be merged with another accpeted batch with unsatisfied required inputs to meet token creation criteria.
+#Batch 1 has met the log token creation criteria, Batch 2's required inputs were not satisfied, the batch will stay in the blockcahin and at the foresters facility until the quantity is enough for the token creation criteria. The batch can be merged with another accpeted batch with unsatisfied required inputs to meet token creation criteria.

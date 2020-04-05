@@ -22,7 +22,7 @@ aCi <- as.factor(aMtdat$aCi)
 Si <- as.factor(Mtdat$Si)
 aSi <- as.factor(aMtdat$aSi)
 
-#First step is satisfying log criteria, the microtag data must match the approved microtag criteria
+#Satisfying log criteria, the microtag data must match the approved microtaggnant QR code criteria
 
 #LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M %in% aM & Si %in% aSi & Ci %in% aCi) 

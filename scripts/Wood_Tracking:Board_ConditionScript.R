@@ -1,109 +1,64 @@
-
-
-#CREATE DATA FOR BOARD TOKEN FUNCTIONS
+#Check board tokens for conditions of acceptable products that can be entered into the supply chain. The board token data must satisfy 3 parameters of the board contract (Board Condition 1). 
 library(readxl)
-aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
-log_board <- read_excel("data/Board_TokenConditions_Sawmill.xlsx")
+aboard <- read_excel("data/Board_RetailerConditions.xlsx")
+board_scan <- read_excel("data/Board_Scan.xlsx")
 
-#M <- (microtag scan data)
+board_scan
+aboard
 #Ci <- (input criteria)
 #Ri <- (required inputs)
 #Rs <- (required supplier)
 
-M <- as.factor(log_board$M)
-aM <- as.factor(aMtdat$aM)
-Ci <- as.factor(log_board$Ci)
-aCi <- as.factor(aMtdat$aCi)
-Ri <- as.factor(log_board$Ri)
-aRi <- as.factor(aMtdat$aRi)
-Rs <- as.factor(log_board$Rs)
-aRs <- as.factor(aMtdat$aRs)
+
+bCi <- as.factor(board_scan$Ci)
+baCi <- as.factor(aboard$aCi)
+bRi <- as.factor(board_scan$Ri)
+baRi <- as.factor(aboard$aRi)
+bRs <- as.factor(board_scan$Rs)
+baRs <- as.factor(aboard$aRs)
 
 #BOARD CONDITIONS 
-BoardCondition1 <- (m = Ci = Ri = Rs)
-BoardCondition2 <- (m != Ci = Ri = Rs)
-BoardCondition3 <- (m = Ci != Ri = Rs)
-BoardCondition4 <- (m = Ci = Ri != Rs)
-BoardCondition5 <- (m = Ci != Ri != Rs)
-BoardCondition6 <- (m != Ci = Ri != Rs)
-BoardCondition7 <- (mm != Ci != Ri != Rs)
+BoardCondition1 <- (bCi %in% baCi & bRi %in% baRi & bRs %in% baRs)
+BoardCondition2 <- (bCi %!in% baCi & bRi %in% baRi & bRs %in% baRs)
+BoardCondition3 <- (bCi %in% baCi & bRi %!in% baRi & bRs %in% baRs)
+BoardCondition4 <- (bCi %in% baCi & bRi %in% baRi & bRs %!in% baRs)
 
-M %in% aM & Si %in% aSi & Ci %in% aCi
 
-#M <- (microtag scan data)
-M %in% aM
-which(M %in% aM)
-ifelse (M %in% aM,"Accepted Microtag","Not Accepted Microtag")
 
 #Ci <- (input criteria)
-Ci %in% aCi
-which(Ci %in% aCi)
+bCi %in% baCi
+which(bCi %in% baCi)
 ifelse(condition, do_if_true, do_if_false)
-ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
+ifelse (bCi %in% baCi,"Accepted Criteria","Not Accepted Criteria")
 
 #Ri <- (required inputs)
-Ri %in% aRi
-which(Ri %in% aRi)
+bRi %in% baRi
+which(bRi %in% baRi)
 ifelse(condition, do_if_true, do_if_false)
-ifelse (Ri %in% aRi,"Accepted Required Inputs","Not Accepted Required Inputs")
+ifelse (bRi %in% baRi,"Accepted Required Inputs","Not Accepted Required Inputs")
 
 #Rs <- (required supplier)
-Rs %in% aRs
-which(Rs %in% aRs)
+bRs %in% baRs
+which(bRs %in% baRs)
 ifelse(condition, do_if_true, do_if_false)
-ifelse (Rs %in% aRs,"Correct Number of Required Suppliers","Incorrect Number of Required Suppliers")
-
+ifelse (bRs %in% baRs,"Correct Number of Required Suppliers","Incorrect Number of Required Suppliers")
 
 
 #Check Board Condition
-BoardCondition1 <- ifelse (M %in% aM & Ci %in% aCi & Ri %in% aRi &Rs %in% aRs, "Board Condition Met", "Revert") 
+BoardCondition1 <- ifelse (bCi %in% baCi & bRi %in% baRi & bRs %in% baRs, "Board Condition Met", "Revert") 
 BoardCondition1                      
 
-#Non-Log Condition 1 will fail/revert
+#Non-Board Condition 1 will fail/revert
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
-BoardCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
+BoardCondition2 <- ifelse (bCi %!in% baCi, "Failed Input Criteria", "Revert") 
 BoardCondition2
 
-BoardCondition3 <- ifelse (Ri %!in% aRi, "Failed Required Inputs", "Revert") 
+BoardCondition3 <- ifelse (bRi %!in% baRi, "Failed Required Inputs", "Revert") 
 BoardCondition3
 
-BoardCondition4 <- ifelse (Ci %!in% aCi, "Failed Input Criteria", "Revert") 
+BoardCondition4 <- ifelse (bRs %!in% baRs, "Failed Required Suppliers", "Revert") 
 BoardCondition4 
 
-BoardCondition5 <- ifelse (Rs %!in% aRs, "Failed Required Suppliers", "Revert") 
-BoardCondition5 
-
-
-
-
-#board.verify <- {if(log.verify = BoardCondition1)
-  stop("board token")
-  else if(log.verify = BaordCondition2)
-    stop("Accept Token")
-  else if(log.verify = BaordCondition3)
-    stop("Accept Token")
-  else if(log.verify = BaordCondition4)
-    stop("Accept Token")
-  else if(log.verify = BaordCondition5)
-    stop("Accept Token")
-  else if(log.verify = BaordCondition6)
-    stop("Accept Token")
-  else if(log.verify = BaordCondition7)
-    stop("Accept Token")
-}
-
-
-
-#Forester -> Log Contract -> Log Tokens: Tree species, location
-#Sawmill -> Board Contract -> Board Tokens: Data from log token, quantity
-#Lowes -> Lumber Contract -> Holds Board tokens
-
-#The token ID will be composed with the following information: 
-
-#Cu <- (input units)
-#Ci <- (input criteria)
-#Ta <- (token amount)
-#To  <- (token owner) ? token creator 
-
-#Token ID [Ta, Cu, Ci, To, date/time stamp]: 
+BoardCondition1  
+BoardCondition2
