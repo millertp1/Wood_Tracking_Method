@@ -57,8 +57,6 @@ LogCondition1
 LogCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
 LogCondition2
 
-#It's been identified that the microtaggant paint did not meet criteria for entry 2. 
-
 
 LogCondition3 <- ifelse ( Si %!in% aSi, "Failed Supplier Identifier", "Revert") 
 LogCondition3

@@ -52,7 +52,11 @@ ifelse (bRs %in% baRs,"Correct Number of Required Suppliers","Incorrect Number o
 BoardCondition1 <- ifelse (bCi %in% baCi & bRi %in% baRi & bRs %in% baRs, "Board Condition Met", "Revert") 
 BoardCondition1                      
 
-#Non-Board Condition 1 will fail/revert
+#Batches 1 & 2 have met the conditions of acceptable board batches that can be purchased by the retailer. Batch 3 does not meet the criteria, continue with the other conditions to identify the failed criteria. 
+
+
+
+#Non-Board Condition 1 will fail/revert and corresponding batches can not be entered into the supply chain or stored in the blockchain
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
 BoardCondition2 <- ifelse (bCi %!in% baCi, "Failed Input Criteria", "Revert") 
@@ -64,6 +68,7 @@ BoardCondition3
 BoardCondition4 <- ifelse (bRs %!in% baRs, "Failed Required Suppliers", "Revert") 
 BoardCondition4 
 
+#CONDITION FUNCTIONS LISTED
 BoardCondition1  
 BoardCondition2
 BoardCondition3
