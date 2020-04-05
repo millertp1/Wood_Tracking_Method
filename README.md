@@ -26,6 +26,8 @@ Wood_Tracking: Log_TokenCreation.R - The microtaggant paint scan of the accpeted
 
 3. The physical logs are transported to the sawmill. The sawmill will verify the microtaggant and QR code by scanning the QR code and verifying the microtaggant paint, ensuring the batch that has arrived is the one that corresponds to the log token in the blockchain. If the microtaggant paint scan is different in any way, the sawmill will reject the load of logs. If the microtaggant paint scan matches the phyiscal logs are accepted and the log tokens are consumed from the forester to the sawmill.
 
+Second microtaggant QR code scan with script:
+
 Wood_Tracking:MicrotagScan.R - The second microtaggant QR code scan is done by the sawmill. To meet the conditions of acceptable products that can be accepted by the sawmill and remain in the supply chain, the QR code scan must satisfy the 3 parameters of Log Condition 1 to be accepted and consumed by the sawmill. The microtaggant paint scans from both the forester and sawmill (Forester_Mircotag_Scan.xlsx) will be matched against the criteria set in the Microtag_Scan_Key.xlsx
 
 4.	The sawmill must define the number of logs used for production to create a batch of boards. The accpeted log batches will be matched against the board token creation crieria, if the criteria isn't met the logs will be stored until the right quantity or paraemters are met for board token creation.  
