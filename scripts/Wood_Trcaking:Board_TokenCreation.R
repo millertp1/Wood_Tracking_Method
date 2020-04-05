@@ -1,11 +1,11 @@
-#Log Token Function
+#Board Token Functions
 
-#Read in Token Key, this is the criteria that must be met from the foresters QR code Microtaggnant scan to create a log token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of aM. Second letter coreesponds to the two letter combo aCi. The third letter corresponds to the number aSi. 
+#Read in Token Key, this is the criteria that must be met from the foresters QR code Microtaggnant scan to create a log token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of baCi. Second letter coreesponds to the two letter combo baRi. The third letter corresponds to the number aRs. 
 bTokenKey <- read_excel("data/Board_TokenKey.xlsx", 
                         col_names = FALSE, col_types = c("text"))
 View(bTokenKey)
 
-#Read in Microtag Scan data for token verification, this is  the foresters QR code Microtaggnant scan data entry, it is a condensed version of the Microtag Scan data. First letter corresponds to  the three letter combo of M. Second letter coreesponds to the two letter combo Ci. The third letter corresponds to the number Si.  
+#Read in Microtag Scan data for token verification, this is  the foresters QR code Microtaggnant scan data entry, it is a condensed version of the Microtag Scan data. First letter corresponds to  the three letter combo of bCi. Second letter coreesponds to the two letter combo bRi. The third letter corresponds to the number bRs.  
 bToken <- read_excel("data/Microtagscan_BoardToken.xlsx")
 View(bToken)
 
@@ -31,7 +31,7 @@ bLogToken_Verify <- function(bTokenScan, bTokenScanKey) {
 }
 
 
-LogToken_Verify(bTokenScan, bTokenScanKey)
+bLogToken_Verify(bTokenScan, bTokenScanKey)
 
 #Function that can match any accepted scanned microtaggant paint scans of log batches aginst the token creation criteria.
 sapply(bToken, function(x) bLogToken_Verify(x,bTokenScanKey))

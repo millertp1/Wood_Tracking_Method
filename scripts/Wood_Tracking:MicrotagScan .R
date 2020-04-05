@@ -14,7 +14,7 @@ View(Mtdat)
 #Si <- (supplier identifier)
 
 
-#Set columns as factors 
+#Set columns as factors; categorical variables enter into statistical models differently than continuous variables, storing data as factors insures that the modeling functions will treat such data correctly 
 M <- as.factor(Mtdat$M)
 aM <- as.factor(aMtdat$aM)
 Ci <- as.factor(Mtdat$Ci)

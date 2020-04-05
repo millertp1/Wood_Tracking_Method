@@ -1,6 +1,10 @@
 #Check board tokens for conditions of acceptable products that can be entered into the supply chain. The board token data must satisfy 3 parameters of the board contract (Board Condition 1). 
 library(readxl)
+
+#The board condition criteria for the retailer to accept board batch
 aboard <- read_excel("data/Board_RetailerConditions.xlsx")
+
+#Simulated board token data scan
 board_scan <- read_excel("data/Board_Scan.xlsx")
 
 board_scan
@@ -9,7 +13,7 @@ aboard
 #Ri <- (required inputs)
 #Rs <- (required supplier)
 
-
+#Set columns as factors; categorical variables enter into statistical models differently than continuous variables, storing data as factors insures that the modeling functions will treat such data correctly
 bCi <- as.factor(board_scan$Ci)
 baCi <- as.factor(aboard$aCi)
 bRi <- as.factor(board_scan$Ri)
@@ -62,3 +66,5 @@ BoardCondition4
 
 BoardCondition1  
 BoardCondition2
+BoardCondition3
+BoardCondition4
