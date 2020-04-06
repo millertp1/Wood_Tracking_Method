@@ -1,6 +1,6 @@
-#Board Token Function
+#Log Token Function
 
-#Read in Token Key, this is the criteria that must be met from the QR code Microtaggnant scan to create a board token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of aM. Second letter coreesponds to the two letter combo aCi. The third letter corresponds to the number aSi. 
+#Read in Token Key, this is the criteria that must be met from the QR code Microtaggnant scan to create a log token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of aM. Second letter coreesponds to the two letter combo aCi. The third letter corresponds to the number aSi. 
 mTokenKey <-read_excel("data/MicrotagScan_LogTokenKey.xlsx", 
                             col_names = FALSE)
 View(mTokenKey)

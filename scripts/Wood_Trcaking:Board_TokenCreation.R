@@ -33,7 +33,7 @@ bLogToken_Verify <- function(bTokenScan, bTokenScanKey) {
 
 bLogToken_Verify(bTokenScan, bTokenScanKey)
 
-#Function that can match any accepted scanned microtaggant paint scans of log batches aginst the token creation criteria.
+#Function that can match any accepted scanned microtaggant paint scans of log batches aginst the board token creation criteria.
 sapply(bToken, function(x) bLogToken_Verify(x,bTokenScanKey))
 
 #Batch 1 has met the board token creation criteria, Batch 2's required inputs were not satisfied, the batch will stay in the blockcahin and at the foresters facility until the quantity is enough for the token creation criteria. The batch can be merged with another accpeted batch with unsatisfied required inputs to meet token creation criteria.

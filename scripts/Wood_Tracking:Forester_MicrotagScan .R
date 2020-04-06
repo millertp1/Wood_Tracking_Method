@@ -1,15 +1,15 @@
 
-#Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
+#Read in Accepted microtaggant scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
 aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
 View(aMtdat)
 
-#Read in Mircotag scan, the microtag layers, input criteria and supplier indentifer
+#Read in microtaggant scan, the microtag layers, input criteria and supplier indentifer
 Mtdat <- read_excel("data/Forester_Mircotag_Scan.xlsx")
 View(Mtdat)
 
 
-#M <- (microtag scan data)
+#M <- (microtaggant scan data)
 #Ci <- (input criteria)
 #Si <- (supplier identifier)
 
@@ -22,7 +22,7 @@ aCi <- as.factor(aMtdat$aCi)
 Si <- as.factor(Mtdat$Si)
 aSi <- as.factor(aMtdat$aSi)
 
-#Satisfying log criteria, the microtag data must match the approved microtaggnant QR code criteria
+#Satisfying log criteria, the microtaggant data must match the approved microtaggnant QR code criteria
 
 #LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M %in% aM & Si %in% aSi & Ci %in% aCi) 
@@ -33,7 +33,7 @@ LogCondition4 <- (M = aM & Ci = aCi & Si != aSi)
 #M <- (microtag scan data)
 M %in% aM
 which(M %in% aM)
-ifelse (M %in% aM,"Accepted Microtag","Not Accepted Microtag")
+ifelse (M %in% aM,"Accepted Microtaggant","Not Accepted Microtaggant")
 
 #Ci <- (input criteria)
 Ci %in% aCi

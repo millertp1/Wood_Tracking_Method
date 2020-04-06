@@ -26,8 +26,8 @@ aSi <- as.factor(aMtdat$aSi)
 #LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M %in% aM & Si %in% aSi & Ci %in% aCi) 
 LogCondition2 <- (M %!in% aM & Si %in% aSi & Ci %in% aCi) 
-LogCondition3 <- (M = aM & Ci != aCi & Si = aSi) 
-LogCondition4 <- (M = aM & Ci = aCi & Si != aSi) 
+LogCondition3 <- (M %in% aM & Si %!in% aSi & Ci %in% aCi) 
+LogCondition4 <- (M %!in% aM & Si %in% aSi & Ci %!in% aCi) 
 
 #M <- (microtag scan data)
 M %in% aM
