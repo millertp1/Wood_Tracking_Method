@@ -12,7 +12,7 @@ All data scans and criteria keys were simulated and can be modified for useer pr
 
 1.	Trees in a certified forest are harvested. The ends of the logs are tagged with a QR code using a stencil and microtaggant paint. The QR code will house tree location, season, and species. This will act as the certification necessary to create the log token.
 
-Initial microtaggant QR code scan with script: 
+Forester microtaggant QR code scan with script: 
 
 Wood_Tracking:Forester_MicrotagScan.R - The initial microtaggant QR code scan is done by the forester, which corresponds to the physical logs that have been cut. To meet the conditions of acceptable products that can be entered into the supply chain, the QR code scan must satisfy 3 parameters of the token contract (Log Condition 1). The microtaggant paint scans by the forester (Forester_Mircotag_Scan.xlsx) will be matched against the criteria set in the Microtag_Scan_Key.xlsx
 
