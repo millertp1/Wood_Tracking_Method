@@ -1,38 +1,46 @@
-#Read in Accepted Mircotag scan criteria, the approved microtag layers, input criteria and supplier indentifer
+```{r}
+#Read in Accepted microtaggant scan criteria, the approved microtag layers, input criteria and supplier indentifer
 library(readxl)
 aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
 View(aMtdat)
 
-#Read in Mircotag scan, the microtag layers, input criteria and supplier indentifer
-Msdat<- read_excel("data/Sawmill_Mircotag_Scan.xlsx")
-View(Msdat)
+#Read in microtaggant scan, the microtag layers, input criteria and supplier indentifer
+Mtdat <- read_excel("data/Forester_Mircotag_Scan.xlsx")
+View(Mtdat)
+```
 
-
-#M <- (microtag scan data)
+```{r}
+#M <- (microtaggant scan data)
 #Ci <- (input criteria)
 #Si <- (supplier identifier)
+```
 
+```{r}
 
 #Set columns as factors; categorical variables enter into statistical models differently than continuous variables, storing data as factors insures that the modeling functions will treat such data correctly 
-M <- as.factor(Msdat$M)
+M <- as.factor(Mtdat$M)
 aM <- as.factor(aMtdat$aM)
-Ci <- as.factor(Msdat$Ci)
+Ci <- as.factor(Mtdat$Ci)
 aCi <- as.factor(aMtdat$aCi)
-Si <- as.factor(Msdat$Si)
+Si <- as.factor(Mtdat$Si)
 aSi <- as.factor(aMtdat$aSi)
+```
 
-#Satisfying log criteria, the microtag data must match the approved microtaggnant QR code criteria
+```{r}
+#Satisfying log criteria, the microtaggant data must match the approved microtaggnant QR code criteria
 
 #LogCondition <- (aM, aCi, aSi)
 LogCondition1 <- (M %in% aM & Si %in% aSi & Ci %in% aCi) 
 LogCondition2 <- (M %!in% aM & Si %in% aSi & Ci %in% aCi) 
-LogCondition3 <- (M %in% aM & Si %!in% aSi & Ci %in% aCi) 
-LogCondition4 <- (M %!in% aM & Si %in% aSi & Ci %!in% aCi) 
+LogCondition3 <- (M = aM & Ci != aCi & Si = aSi) 
+LogCondition4 <- (M = aM & Ci = aCi & Si != aSi) 
+```
 
+```{r}
 #M <- (microtag scan data)
 M %in% aM
 which(M %in% aM)
-ifelse (M %in% aM,"Accepted Microtag","Not Accepted Microtag")
+ifelse (M %in% aM,"Accepted Microtaggant","Not Accepted Microtaggant")
 
 #Ci <- (input criteria)
 Ci %in% aCi
@@ -44,18 +52,24 @@ ifelse (Ci %in% aCi,"Accepted Criteria","Not Accepted Criteria")
 Si %in% aSi
 which(Si %in% aSi)
 ifelse (Si %in% aSi,"Accepted Supplier Identifier","Not Accepted")
+```
 
+```{r}
 #Check Log Condition, Log Condition 1 is the only acceptable condition to record and store logs in the blockcahin. 
 LogCondition1 <- ifelse (M %in% aM & Si %in% aSi & Ci %in% aCi, "Log Condition Met", "Revert") 
 LogCondition1                       
+ 
+#Entry 1 & 3 have met the conditions and can entered into the blockcahin and supply chain,. Entry 2 does not meet the criteria, continue with the other conditions to identify the failed criteria. 
+```
 
-#Both batches of logs sent from the forester match the accepted Mircotag scan criteria. The phyiscal and log tokens can be consumed by sawmill. 
-
+```{r}
 #Non-Log Condition 1 will fail/revert
 '%!in%' <- function(x,y)!('%in%'(x,y))
 
 LogCondition2 <- ifelse (M %!in% aM, "Failed Microtag", "Revert") 
 LogCondition2
+
+#It's been identified that the microtaggant paint did not meet criteria for entry 2. 
 
 
 LogCondition3 <- ifelse ( Si %!in% aSi, "Failed Supplier Identifier", "Revert") 
@@ -63,11 +77,13 @@ LogCondition3
 
 LogCondition4 <- ifelse (Ci %!in% aCi, "Failed Input Criteria", "Revert") 
 LogCondition4
+```
 
+```{r}
 #CONDITION FUNCTIONS LISTED 
 LogCondition1 
 LogCondition2 
 LogCondition3 
 LogCondition4  
 LogCondition5
-
+```
