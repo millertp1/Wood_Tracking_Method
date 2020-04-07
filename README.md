@@ -42,3 +42,5 @@ Boards verfied with script:
 
 Wood_Tracking:Board_ConditionScript.Rmd - The board token data will be checked to meet the conditions of acceptable products that can be entered into the supply chain. The board token data must satisfy 3 parameters of the board contract (Board Condition 1). 
 
+
+Acknowledgements: Dr. McGlinn for providing insightful feedback and guidance for this project's code. 
