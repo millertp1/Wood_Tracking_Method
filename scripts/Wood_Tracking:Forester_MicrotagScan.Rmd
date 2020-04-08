@@ -1,11 +1,11 @@
 ```{r}
 #Read in Accepted microtaggant scan criteria, the approved microtag layers, input criteria and supplier indentifer
-library(readxl)
-aMtdat <- read_excel("data/Microtag_Scan_Key.xlsx")
+library(readr)
+aMtdat <- read_csv("data/Microtag_Scan_Key.xlsx")
 View(aMtdat)
 
 #Read in microtaggant scan, the microtag layers, input criteria and supplier indentifer
-Mtdat <- read_excel("data/Forester_Mircotag_Scan.xlsx")
+Mtdat <- read_csv("data/Forester_Mircotag_Scan.xlsx")
 View(Mtdat)
 ```
 

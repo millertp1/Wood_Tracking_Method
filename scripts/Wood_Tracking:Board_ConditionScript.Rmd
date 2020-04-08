@@ -1,13 +1,13 @@
 #Check board tokens for conditions of acceptable products that can be entered into the supply chain. 
 #The board token data must satisfy 3 parameters of the board contract (Board Condition 1). 
-library(readxl)
+library(readr)
 
 ```{r}
 #The board condition criteria for the retailer to accept board batch
-aboard <- read_excel("data/Board_RetailerConditions.xlsx")
+aboard <- read_csv("data/Board_RetailerConditions.csv")
 
 #Simulated board token data scan
-board_scan <- read_excel("data/Board_Scan.xlsx")
+board_scan <- read_csv("data/Board_Scan.csv")
 
 board_scan
 aboard
