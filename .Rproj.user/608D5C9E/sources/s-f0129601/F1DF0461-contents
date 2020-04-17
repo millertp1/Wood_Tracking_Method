@@ -1,0 +1,75 @@
+#Check board tokens for conditions of acceptable products that can be entered into the supply chain. The board token data must satisfy 3 parameters of the board contract (Board Condition 1). 
+library(readxl)
+
+#The board condition criteria for the retailer to accept board batch
+aboard <- read_excel("data/Board_RetailerConditions.xlsx")
+
+#Simulated board token data scan
+board_scan <- read_excel("data/Board_Scan.xlsx")
+
+board_scan
+aboard
+#Ci <- (input criteria)
+#Ri <- (required inputs)
+#Rs <- (required supplier)
+
+#Set columns as factors; categorical variables enter into statistical models differently than continuous variables, storing data as factors insures that the modeling functions will treat such data correctly
+bCi <- as.factor(board_scan$Ci)
+baCi <- as.factor(aboard$aCi)
+bRi <- as.factor(board_scan$Ri)
+baRi <- as.factor(aboard$aRi)
+bRs <- as.factor(board_scan$Rs)
+baRs <- as.factor(aboard$aRs)
+
+#BOARD CONDITIONS 
+BoardCondition1 <- (bCi %in% baCi & bRi %in% baRi & bRs %in% baRs)
+BoardCondition2 <- (bCi %!in% baCi & bRi %in% baRi & bRs %in% baRs)
+BoardCondition3 <- (bCi %in% baCi & bRi %!in% baRi & bRs %in% baRs)
+BoardCondition4 <- (bCi %in% baCi & bRi %in% baRi & bRs %!in% baRs)
+
+
+
+#Ci <- (input criteria)
+bCi %in% baCi
+which(bCi %in% baCi)
+ifelse(condition, do_if_true, do_if_false)
+ifelse (bCi %in% baCi,"Accepted Criteria","Not Accepted Criteria")
+
+#Ri <- (required inputs)
+bRi %in% baRi
+which(bRi %in% baRi)
+ifelse(condition, do_if_true, do_if_false)
+ifelse (bRi %in% baRi,"Accepted Required Inputs","Not Accepted Required Inputs")
+
+#Rs <- (required supplier)
+bRs %in% baRs
+which(bRs %in% baRs)
+ifelse(condition, do_if_true, do_if_false)
+ifelse (bRs %in% baRs,"Correct Number of Required Suppliers","Incorrect Number of Required Suppliers")
+
+
+#Check Board Condition
+BoardCondition1 <- ifelse (bCi %in% baCi & bRi %in% baRi & bRs %in% baRs, "Board Condition Met", "Revert") 
+BoardCondition1                      
+
+#Batches 1 & 2 have met the conditions of acceptable board batches that can be purchased by the retailer. Batch 3 does not meet the criteria, continue with the other conditions to identify the failed criteria. 
+
+
+
+#Non-Board Condition 1 will fail/revert and corresponding batches can not be entered into the supply chain or stored in the blockchain
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+BoardCondition2 <- ifelse (bCi %!in% baCi, "Failed Input Criteria", "Revert") 
+BoardCondition2
+
+BoardCondition3 <- ifelse (bRi %!in% baRi, "Failed Required Inputs", "Revert") 
+BoardCondition3
+
+BoardCondition4 <- ifelse (bRs %!in% baRs, "Failed Required Suppliers", "Revert") 
+BoardCondition4 
+
+#CONDITION FUNCTIONS LISTED
+BoardCondition1  
+BoardCondition2
+BoardCondition3
+BoardCondition4

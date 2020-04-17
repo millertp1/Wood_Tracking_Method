@@ -1,0 +1,70 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r}
+library(readr)
+MiceDiet <- read_csv("~/R/R_methods/Envi Stats Hw/MiceDiet.csv")
+```
+
+```{r}
+#1. Construct a box plot showing lifetime by diet level and discuss the plot. Also calculate the sample means and sample standard deviations for each diet level and discuss your findings. The box plots show that the different meal plan groups distributions are roughly symmetric and have roughly similar spreads. The boxplots indentify the lowest lifespans on average were the NP and N/N85 meal plans. While the lifespans of the  remaining meal plan groups cannot be easily distinguished from the boxplot comparison. There are many low numbered outliers within most of the meal plan groups, skewing the data to the left. Looking at the means and sd for the meal plan groups, it is confirmed that the NP group had the lowest lifespan, the only group to see a death before 10 months, also the mean is the lowest with 27.4 months liefspan. Meal plan groups who reieved normal calories during weaning and restricted diets after (below the reccomnded 85) lived the longest amongst. The means of N/R40: 45.12 & N/50:42.29. The standard deviations are interesting to me, if mice are living or dying 5-7 months before or after the mean lifetime span, that seems like a huge interval. The largest sd belongs to N/R50:7.77 and the smallest sd belongs to N/N85:5.13. 
+
+
+boxplot(LIFETIME ~ DIET, data= MiceDiet,col=35,pch=15)
+favstats(LIFETIME ~ DIET, data= MiceDiet)
+```
+
+```{r}
+#2. Run a One-Way ANOVA and provide the ANOVA table. Discuss your conclusion from the F-test. F#From the anova test DIET is a statiscally significant predictor of LIFETIME, the p-vaule is deemed significant. The F-statistic of DIET is 57.1, which has a p-value of 0 (2e-16). This small p-value goves evidence to reject the Ho that all lifespans are the same among the diet groups and conclude that diet is a significant predictor of LIFETIME. With this 1-way ANOVA test there is still a high unexplained vaiance which is seen in the residuals high sum of squares. A high residual sum of squares indicates that the model poorly explains the data. The DIET sum of squares is also high. This anova test does indentify DIET as an indicator but it is not enough to truly explain the data. With these high sum of squares we know that in this model, measuresments are far away from the mean.
+
+Mice.lm<-lm(LIFETIME ~ DIET, data= MiceDiet)
+summary(Mice.lm)
+anova(Mice.lm)
+
+
+anovamice <- aov(LIFETIME ~ DIET, data= MiceDiet)
+summary(anovamice)
+```
+
+
+```{r}
+#3. Construct a Residual versus Fits plot (or box plot) as well as a Normal QQ plot. Describe any weaknesses in the model assumptions. The residuals versus the model fits and shows roughly equal spread about the zero line, that assumuption is satisfied. The normal Q-Q plot indicates some departure from normality, but not enough to bring into question the validity of the results. The weakness in these assumptions is that there is significant differences among LIFESPANS of the differing meal plans.There is still alot of unexplained varaibaility, Residuals sum of squares is much higher than DIET's sum of squares.   
+
+
+mFits<-Mice.lm$fitted.values
+mResiduals<-Mice.lm$residuals
+boxplot(mResiduals~mFits,col=10)
+plot(mResiduals~mFits,pch=19,col="sienna")
+qqnorm(mResiduals,pch=19)
+```
+
+
+
+```{r}
+#4. Construct a pairwise t-test table twice, once with no adjustment for multiple compar-isons and once using Bonferroni adjustments. Highlight the signicant diferences in each table. Looking at the results from the LSD test, every diet groups seems to is statisically singificant, none share the same letter. When a pairwise t-test is conducted with no adjustments we see that NP has the lowest pairs of p-vaule amongst the groups. The p-value gives the probability of observing the test results under the null hypothesis. The comparisons bewteen N/N85 and the other pairs is significantlt low as well, both NP and N/N85 are the highest kcal diets of the groups. With Bonferroni adjustments I can improve my ability to identify which treatment means are significantly different from each other. With adjustements the p-vaules for the pair comparisons increased. Making the differnces in means less significant with p-vaule increased. There are increases among the lopro group and the N/R40, N/R50, R/R50 groups, before the adjustment these comparisons seem slightly ststisaclly significant. After the adjustment they are less significantly different from each other. And overall we can idnetify that for the restricted diets the p-vaules are larger when compared among each other. The highest p-vaule is seen with N/R50 and the lopro meaning there means are the less significantly different. 
+
+library(agricolae)
+
+tapply(MiceDiet$LIFETIME,MiceDiet$DIET,mean)
+tapply(MiceDiet$LIFETIME,MiceDiet$DIET,sd)
+anova(Mice.lm)
+
+mlsd.test<-LSD.test(MiceDiet$LIFETIME,MiceDiet$DIET,343,44.6)
+mlsd.test
+pairwise.t.test(MiceDiet$LIFETIME,MiceDiet$DIET,p.adj="none")
+pairwise.t.test(MiceDiet$LIFETIME,MiceDiet$DIET,p.adj="bonferroni")
+
+TukeyHSD(aov(LIFETIME~DIET,data=MiceDiet))
+plot(TukeyHSD(aov(LIFETIME~DIET,data=MiceDiet)))
+
+```
+```{r}
+#5. For the comparisons that make sense, discuss your conclusions.From the family wise plot I can coonclude that the following comparisons the means are not significantly different from one another because they contain zero in theri intervals. N/R50-lopro, R/R50-lopro, N/R50-N/R40, R/R50-N/R40 & R/R50-N/R50. All of these diets are restrictive after weaning, the highest adjusted p-value is seen with R/R50-N/R40 & R/R50-N/R50. My conclusion is that mice longevity is increased with kcal diet restrictions and that diets under kcal 85 are not significantly different from one another, there is suggetsive evidence with the high p-values that indicates increased support for the null hypothesis.
+
+
+
+```
+

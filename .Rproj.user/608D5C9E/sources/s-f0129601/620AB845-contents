@@ -1,0 +1,11 @@
+library(readr)
+heart <- read_csv("~/R/R_methods/Envi Stats Hw/heart.csv")
+View(heart)
+
+pairs(heart[,c(1,2,3,4,5,6,7,8,9,10)],col=as.numeric(heart$famhist)+1,pch=19)
+
+pairs(heart[,c(1,2,3,4,5,6,7, 9)])
+
+boxplot(BillDepth~KnownSex,data=blue,pch=19,col=5)
+boxplot(BillWidth~KnownSex,data=blue,pch=19,col=2)
+boxplot(BillLength~KnownSex,data=blue,pch=19,col=3)

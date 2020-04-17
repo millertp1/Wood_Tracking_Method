@@ -1,0 +1,58 @@
+library(readr)
+heart <- read_csv("~/R/R_methods/Envi Stats Hw/heart.csv")
+View(heart)
+head(heart)
+
+#1.	Fit a model with all predictors, show the summary and comment on the results.The most significant predictors of CHD from this model are age, typea, ldl and tobacco, they all have low p-values which have been deemed significant from the summary.With these small p-values for the listed significant predictors, we have evidence to reject the null hypothesis ‘that CHD prediction is the same among the different predictor variables'.   
+pairs(heart[,-c(5,10)],pch=19,col=heart$chd+3)
+
+par(mfrow=c(1,9)) # puts all eight plots side-by-side
+boxplot(sbp~chd,data=heart,pch=19,col=14)
+boxplot(tobacco~chd,data=heart,pch=19,col=7)
+boxplot(ldl~chd,data=heart,pch=19,col=28)
+boxplot(adiposity~chd,data=heart,pch=19,col=15)
+boxplot(typea~chd,data=heart,pch=19,col=2)
+boxplot(obesity~chd,data=heart,pch=19,col=4)
+boxplot(as.factor(famhist)~chd,data=heart,pch=19,col=2)
+boxplot(alcohol~chd,data=heart,pch=19,col=11)
+boxplot(age~chd,data=heart,pch=19,col=6)
+
+heart.mod<-glm(chd~sbp+tobacco+ldl+adiposity+typea+obesity+alcohol+age+ as.factor(famhist), data=heart,family=binomial)
+summary(heart.mod)
+
+#2.	Use the step command in R to reduce your model, show the summary of this model and comment on the results. The new model is: glm(formula = chd ~ tobacco + ldl + adiposity + typea + obesity + alcohol + age + adiposity:alcohol + typea:alcohol + adiposity:obesity + tobacco:ldl, family = binomial, data = heart). The significant predictor variables are now, tobacco, ldl, typea, obesity, alcohol, age, adiposity:alcohol and typea:alcohol. With the nost significant predictors being ldl,typea and age. 
+heart.mod2<-step(heart.mod,scope=)
+heart.mod2
+summary(heart.mod2)
+
+#3.	Use the anova command in R to compare your two models.Is there evidence that the larger model is preferred over the reduced model? M
+anova(heart.mod2,heart.mod,test="Chisq")
+
+
+
+
+#4.	Show Marginal Model Plots for the reduced model and comment on the plots
+
+
+install.packages("car")
+library(car)
+
+mmps(heart.mod2,key=T,pch=19)
+pairs(heart[,-c(5,10)],pch=19,col=heart$chd+3)
+#Reference pairs(heart[,c(3,6,7)],pch=19,col=blue$Sex+1)
+
+#5.	Construct a “Confusion Matrix” to compare model predictions to the actual CHD values in the data set.  Calculate the fraction of correct predictions.
+install.packages("generalhoslem")
+library(generalhoslem)
+
+
+h.gof<-logitgof(heart$chd,fitted(heart.mod2),5)
+h.gof
+round(h.gof$expected,3)
+h.gof$observed
+h.Model<-ifelse(predict(heart.mod2,type="response")>0.5,"CHD","No CHD")
+table(h.Model,heart$chd)
+(87+256)/(73+256+46+87)
+
+
+

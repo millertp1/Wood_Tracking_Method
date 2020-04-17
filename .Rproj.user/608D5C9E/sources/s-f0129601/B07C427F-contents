@@ -1,0 +1,21 @@
+```{r}
+#Taylor Miller
+
+
+#What are the names of the columns in this dataset?
+class(tgpp[,1])
+#How many rows and columns does this data file have?
+dim(tgpp)
+#What kind of object is each data column? Hint: checkout the function sapply().
+sapply(tgpp,class)
+#What are the values of the the datafile for rows 1, 5, and 8 at columns 3, 7, and 10
+tgpp[c(1,5,8), c(3,7,10)]
+#Create a pdf of the relationship between the variables “scale” and “richness”. Scale is the area in square meters of the quadrat in which richness was recorded. Be sure to label your axes clearly, and choose a color you find pleasing for the points. 
+plot(tgpp$scale,tgpp$richness, xlab='scale', ylab='richness', col=14)
+#What happens to your plot when you set the plot argument log equal to ‘xy’
+plot(tgpp$scale,tgpp$richness, log='xy', xlab='scale', ylab='richness',col=10, main='scale and richness')
+```
+
+
+
+

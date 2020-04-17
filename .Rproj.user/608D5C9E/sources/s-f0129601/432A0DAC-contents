@@ -1,0 +1,108 @@
+#Log Token Function
+
+#Read in Microtag Scan Token Key, this is the criteria that must be met from the foresters QR code Microtaggnant scan to create a log token in the blockchain system. It is a condensed version of the Microtag Scan data key. First letter corresponds to  the three letter combo of aM. Second letter coreesponds to the two letter combo aCi. The third letter corresponds to the number aSi. 
+mTokenKey <- read_excel("data/MicrotagScan_TokenKey.xlsx", 
+                                    col_names = FALSE, col_types = c("text"))
+View(mTokenKey)
+
+#Read in Microtag Scan for token verification, this is  the foresters QR code Microtaggnant scan, it is a condensed version of the Microtag Scan data. First letter corresponds to  the three letter combo of M. Second letter coreesponds to the two letter combo Ci. The third letter corresponds to the number Si.  
+mToken <- read_excel("data/Microtagscan_Token.xlsx", 
+                                 col_names = FALSE)
+View(mToken)
+
+
+logss <- Ci
+keys <- data.frame(letters = c('M','B', 'T','C'), description = c('Accp', 'Accp'))
+keys
+logss
+logss<- as.character(log)
+unlist(strsplit(logss, split = ''))
+indices <- match(unlist(strsplit(logss, split = '')), keys$letters)
+indices
+keys$description[indices]
+log_code<- unlist(strsplit(log, ''))
+
+
+lookup_description <- function(log, key) {
+  log_code<- unlist(strsplit(log, ''))
+  indices <- match(log_code, key$letters)
+  return(key$description[indices])
+}
+
+lookup_description(log, key)
+
+tree_file<- c('MGYT', 'RMBT', 'GNRT', 'GMRT')
+sapply(tree_file, function(x) lookup_description(x,key))
+
+
+
+
+
+
+get <- 'abc'
+key <- data.frame(letters = c('a', 'c', 'd'), description = c('hot', 'med', 'col'))
+key
+get
+strsplit(get)
+strsplit(log, split = '')
+unlist(strsplit(get, split = ''))
+indices <- match(unlist(strsplit(get, split = '')), key$letters)
+indices
+key$description[indices]
+rm(keys) 
+
+
+
+
+
+
+
+log.verify <- function ()
+  log.verify <- function() {
+    if(function(LogCondition1))
+      print("Log Token")
+    if(function (LogCondition2)) 
+      print("Revert")
+    if(function (LogCondition3))
+      return("Revert")
+    if(function (LogCondition4)) 
+      return("Revert")
+    else stop("Revert"))
+  }
+
+
+
+#2nd attempt to make log verification
+log.verify <- {ifelse(LogCondition1,== "Log Condition Met")
+  print("log token")
+  if(=="Revert")
+    print("FAIL")
+  if(LogCondition3)
+    print("FAIL")
+  if(LogCondition4)
+    print("FAIL")
+}
+
+
+
+
+
+
+
+
+
+#Forester -> Log Contract -> Log Tokens: Tree species, location
+#Sawmill -> Board Contract -> Board Tokens: Data from log token, quantity
+#Lowes -> Lumber Contract -> Holds Board tokens
+
+#The token ID will be composed with the following information: 
+
+#Cu <- (input units)
+#Ci <- (input criteria)
+#Ta <- (token amount)
+#To  <- (token owner) ? token creator 
+
+#Token ID [Ta, Cu, Ci, To, date/time stamp]: 
+
+
+

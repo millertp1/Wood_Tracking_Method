@@ -1,0 +1,169 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+```{r}
+trees <- read.csv('https://raw.githubusercontent.com/dmcglinn/quant_methods/gh-pages/data/treedata_subset.csv')
+str(trees)
+```
+#1. Carry out an exploratory analysis using the tree dataset. 
+#Metadata for the tree study can be found here. Specifically, I would like you to develop and compare models for species cover for a habitat generalist Acer rubrum (Red maple) and a habitat specialist Abies fraseri (Frasier fir). 
+
+```{r}
+summary(trees)
+```
+
+```{r}
+lm(trees$cover ~ trees$spcode)
+```
+
+
+```{r}
+#subset acer rubrum by selecting Acer rubrum then selecting columns of variables
+acer <- subset(trees,subset=species=="Acer rubrum", select= c("cover", "tci", "elev", "beers", "disturb", "streamdist"))
+
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor=3, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) 
+        cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor)
+}
+
+plot(acer)
+
+pairs(acer, lower.panel = panel.smooth, upper.panel = panel.cor)
+
+
+plot(acer)
+
+summary(acer)
+
+#how well does the exploratory model appear to explain cover? It gives alot of information which is not useful to make assumptions
+#which explanatory variables are the most important? The variables for Acer rubrum of importanace seem to be elevation and beers. 
+
+
+acer.lm<-lm(cover ~ beers + elev + streamdist ,data= acer)
+summary(acer.lm)
+#The model explains 3.29% of the variance and has highly significant coefficients for the intercept and the independent variables and also a highly significant overall model p-value. Not much of the variance with cover can be represented with this model.
+```
+
+
+
+```{r}
+#subset Abies fraseri by selecting Abies fraseri then selecting columns of variables
+abies <- subset(trees,subset=species=="Abies fraseri", select= c("cover", "tci", "elev", "beers", "disturb", "streamdist"))
+
+panel.cor <- function(x, y, digits = 2, prefix = "", cex.cor=3, ...)
+{
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- abs(cor(x, y))
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- paste0(prefix, txt)
+    if(missing(cex.cor)) 
+        cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor)
+}
+
+
+
+pairs(abies, lower.panel = panel.smooth, upper.panel = panel.cor)
+
+
+plot(abies)
+
+summary(abies)
+
+#how well does the exploratory model appear to explain cover? It gives alot of information which is not useful to make assumptions
+#which explanatory variables are the most important? The variables for Abies fraseri of importanace seem to be elevation, disturbance and stream distance.
+
+
+abies.lm<-lm(cover ~ disturb + elev + streamdist ,data= abies)
+summary(abies.lm)
+#The model explains 49% of the variance and has highly significant coefficients for the intercept and the elev independent variable and also a highly significant overall model p-value.
+
+
+#do model diagnostics indicate any problems with violations of OLS assumptions? The Homoscedasticity seems to be violated with the acer cover model. Other varibales may hold more weight in cover vs what was depicted in the exploratory analysis. 
+
+
+
+#are you able to explain variance in one species better than another, why might this be the case? The Abies fraseri cover is better explained by the models generated, I assume its easier to detect significant variables because teh Abies is a habitat specialist. While the models do not explain the cover for the Acer which is a generalist. The strengths of the models for cover reflect these special charctaeristicsof generalist vs specialist. 
+
+
+#ANOVA TEST
+anova(acer.lm)
+#Stream distance and beers are the most signifcant varibales for acer, from the anova test
+
+anova(abies.lm)
+#Disturbance and elevation  the most signifcant varibales for acer, from teh anova test
+
+```
+
+```{r}
+#2. You may have noticed that the variable cover is defined as positive integers between 1 and 10. and is therefore better treated as a discrete rather than continuous variable. Re-examine your solutions to the question above but from the perspective of a General Linear Model (GLM) with a Poisson error term (rather than a Gaussian one as in OLS). The Poisson distribution generates integers 0 to positive infinity so this may provide a good first approximation. Your new model calls will look as follows:
+
+#GLM
+
+acer.glm = glm(cover ~ elev + streamdist + beers , data = acer, 
+           family='poisson')
+summary(acer.glm)
+
+abies.glm = glm(cover ~ disturb + elev + streamdist ,data = abies,
+              family='poisson')
+summary(abies.glm)
+
+
+
+#Psuedo r-squared
+pseudo_r2 = function(glm_mod) {
+                1 -  glm_mod$deviance / glm_mod$null.deviance
+            }
+
+
+pseudo_r2(acer.glm)
+
+
+# The r-squared is now 3% for acer
+
+pseudo_r2(abies.glm)
+# The r-squared is now 57% for abies
+
+#Anova test
+
+
+anova(acer.lm, acer.glm)
+#residual of squares is reduced with the acer.glm anova test
+
+anova(abies.lm, abies.glm)
+#residual of squares is reduced with the abies.glm anova test
+```
+
+#3. Provide a plain English summary (i.e., no statistics) of what you have found and what conclusions we can take away from your analysis?
+
+
+#From the analysis I’ve come to the following conclusions: 
+
+#The Acer rubrum’s (Acer) cover can not be explained strictly by the variables relationship with cover. Cover may be the results of other significant relationships. Looking back at the plotted results, stream distance and other relationships have the most significance to better explain Acer rubrum’s  abundance. The model I was able to generate only explained 3.29% Acer rubrum’s  cover, which is not too surprising since this species is a generalist. 
+
+#The Abies fraseri (Abies) cover is better explained by the models generated, I assume its easier to detect significant variables because the Abies is a habitat specialist. It is easier to identify significant influences for Abies abundance with the model and identify relationships. The model generated explained 49% of Abies cover. 
+
+
+
+
+
+
+
+NOTES for me: 
+
+The General Linear Model (GLM) is a useful framework for comparing how several variables affect different continuous variables. In it’s simplest form, GLM is described as: Data = Model + Error (Rutherford, 2001, p.3)
+
+GLM is the foundation for several statistical tests, including ANOVA, ANCOVA and regression analysis. Despite their differences, each fits the definition of Data = Model + Error:
+•	In ANOVA, “data” is the dependent variable scores, the “error” the model is the experimental conditions, and the “error” is the part of the model not explained by the data.
+•	In regression analysis, the independent predictors make up the “model” and the residuals are the “error” component.

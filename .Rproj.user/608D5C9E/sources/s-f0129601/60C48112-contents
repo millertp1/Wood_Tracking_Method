@@ -1,0 +1,170 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+---
+title: "homework2ele"
+author: "Taylor Miller"
+date: "2/6/2020"
+output: pdf_document
+
+```{r}
+#Taylor Miller
+library(readr)
+Ele <- read_csv("~/R/R_methods/Envi Stats Hw/ElephantsMF.csv")
+```
+
+
+```{r}
+#1. Plot Height vs Age and then fit a quadratic model
+
+boxplot(Height~ Age,data=Ele,col=39,pch=19)
+
+
+ele.lm1<-lm(formula = Height ~ Age, data = Ele)
+plot(ele.lm1)
+abline(ele.lm1,lwd=2,col=113)
+summary(ele.lm1)
+```
+
+#The model explains over 69% of the variance and has highly significant coefficients for the intercept and the independent variable and also a highly significant overall model p-value. 
+
+```{r}
+
+plot(Height~ Age, data= Ele, pch=16, ylab = "Height ", cex.lab = 1.3, col = "red" )
+abline(lm(Height ~ Age, data = Ele), col = "blue")
+
+summary(Ele)
+```
+#The model looks good, but we can see that the plot has curvature that is not explained well by a linear model.
+```{r}
+le.lm1<-lm(Height~Age + I(Age^2), data= Ele)
+summary(ele.lm1)
+
+plot(Height~ Age, data= Ele, pch=16, ylab = "Height ", cex.lab = 1.3, col = "red" )
+curve(102.48 + 12.56*x -0.276*x^2, lwd=2,col="Black", add=T)
+```
+#Based off the curve I would predict that a 10yr elephant is 200 cm
+
+
+#2. plot Height vs Age differnet colors for two sexes Male(M) and Female(F). Also fit a model that includes sex
+
+#Plots of both sexes with curve model 
+
+```{r}
+plot(Height ~ Age, data = Ele , type = 'n', 
+     xlab = 'Age (yr)', ylab = 'Height (cm)')
+points(Height ~ Age, data = Ele, subset = Sex == "M",
+       pch = 1, col = 'red')
+points(Height ~ Age, data = Ele, subset = Sex == "F",
+       pch = 2, col = 'blue')
+legend('topleft', c('M', 'F'), col = c('red', 'blue'), 
+       pch = c(1, 2), lty = c(1, 2), bty = 'n')
+
+curve(94.5 + 12.63*x -0.272*x^2 + 13.45, lwd=2,col="Black", add=T)
+       
+ele.lm2<-lm(Height~Age + I(Age^2) + Sex, data= Ele)
+summary(ele.lm2)
+curve(94.5 + 12.63*x -0.272*x^2 + 13.45, lwd=2,col="Black", add=T)
+
+anova(ele.lm1)
+anova(ele.lm2)
+```
+
+#Each sex considered separately.
+```{r}
+malephant<-Ele[Ele$Sex=="M",]
+femalephant<-Ele[Ele$Sex=="F",]
+```
+
+#Males
+```{r}
+ele.lm2<-lm(Height~Age + I(Age^2) + Sex, data= Ele)
+summary(ele.lm2)
+
+plot(Height ~ Age, data = Ele, type = 'n', 
+     xlab = 'Age (yr)', ylab = 'Height (cm)')
+points(Height ~ Age, data = Ele, subset = Sex == "M",
+       pch = 1, col = 'red')
+curve(94.5 + 12.63*x -0.272*x^2 + 13.45, lwd=2,col="red", add=T)
+
+#Females
+
+femalephant.lm1<-lm(Height~Age + I(Age^2), data= femalephant)
+summary(femalephant.lm1)
+points(Height ~ Age, data = Ele, subset = Sex == "F",
+       pch = 2, col = 'blue')
+curve(94.5 + 12.63*x -0.272*x^2 , lwd=2,col="blue", add=T)
+legend('topleft', c('M', 'F'), col = c('red', 'blue'), 
+       pch = c(1, 2), lty = c(1, 2), bty = 'n')
+```
+
+
+#3. New Model add new indicators 
+```{r}
+ele.lm3<-lm(Height~Age + Sex + I(Age^2) + Age*Sex + I(Age^2)*Sex, data= Ele)
+summary(ele.lm3)
+
+plot(Height ~ Age, data = Ele, type = 'n', 
+     xlab = 'Age (yr)', ylab = 'Height (cm)')
+points(Height ~ Age, data = Ele, subset = Sex == "M",
+       pch = 1, col = 'red')
+points(Height ~ Age, data = Ele, subset = Sex == "F",
+       pch = 2, col = 'blue')
+legend('topleft', c('M', 'F'), col = c('red', 'blue'), 
+       pch = c(1, 2), lty = c(1, 2), bty = 'n')
+```
+
+#Male curve
+```{r}
+
+
+#Female curve
+
+anova(ele.lm2)
+anova(ele.lm3)
+
+#3. Best model
+
+step(lm(Height~Age + Sex + I(Age^2) + Age*Sex + I(Age^2)*Sex, data= Ele))
+ele.lm4 <- lm(formula = Height ~ Age + Sex + I(Age^2) + Age*Sex, data = Ele)
+summary(ele.lm4)
+
+plot(Height ~ Age, data = Ele, type = 'n', 
+     xlab = 'Age (yr)', ylab = 'Height (cm)')
+points(Height ~ Age, data = Ele, subset = Sex == "M",
+       pch = 1, col = 'red')
+points(Height ~ Age, data = Ele, subset = Sex == "F",
+       pch = 2, col = 'blue')
+curve(105.28 + 11.23*x -0.242*x^2 , lwd=2,col="blue", add=T)
+curve(105.28 + 11.23*x -0.242*x^2 -5.06 +2.15 -0.02, lwd=2,col="red", add=T)
+legend('topleft', c('M', 'F'), col = c('red', 'blue'), 
+       pch = c(1, 2), lty = c(1, 2), bty = 'n')
+```
+
+#Male curve
+```{r}
+plot(Height ~ Age, data = Ele, type = 'n', 
+     xlab = 'Age (yr)', ylab = 'Height (cm)')
+points(Height ~ Age, data = Ele, subset = Sex == "M",
+       pch = 1, col = 'red')
+points(Height ~ Age, data = Ele, subset = Sex == "F",
+       pch = 2, col = 'blue')
+curve(105.28 + 11.23*x -0.242*x^2 , lwd=2,col="blue", add=T)
+curve(105.28 + 11.23*x -0.242*x^2 -5.06 +2.15 -0.02, lwd=2,col="red", add=T)
+legend('topleft', c('M', 'F'), col = c('red', 'blue'), 
+       pch = c(1, 2), lty = c(1, 2), bty = 'n')
+curve(104.19 + 11.47*x -0.251*x^2 -2.82 + 1.58, lwd=2,col="blue", add=T)
+curve(104.19 + 11.47*x -0.251*x^2, lwd=2,col="red", add=T)
+```
+
+```{r}
+#4. predict Height at age 22 female and male
+
+mynewele<-data.frame(Age=22,Sex='M')
+predict(ele.lm4,new=mynewele,interval="prediction")
+
+myneweleF<-data.frame(Age=22,Sex='F')
+predict(ele.lm4,new=myneweleF,interval="prediction")
+```

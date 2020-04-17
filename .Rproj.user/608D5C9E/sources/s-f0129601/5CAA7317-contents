@@ -1,0 +1,65 @@
+# Before running the code below, please read the "README.md" located in the repository.
+
+
+POWER ANALYSIS
+
+```{r}
+# Install "pwr" package for power analysis prior to running code. 
+# Loading required packages
+library(pwr)   
+```
+
+
+Power analysis t-test(n = sample size, d = effect size, sig.level = significance 
+                      level, power = power, type = t-test type)
+
+# d = (mean group 1 - mean group 2) / standard deviation
+
+```{r}
+# Ballinger et al. (1979) running speed of Racerunners on a racetrack:
+running_time <- c(1.63, 1.55, 1.39, 1.26, 1.53, 1.40, 2.28, 1.28, 1.95, 1.62)
+# Power Analysis Constants:
+# set percent of effect
+eff_pct <- 0.15
+cnt_mean <- mean(running_time)  #control mean
+trt_mean <- cnt_mean + (cnt_mean * eff_pct)   #treatment mean
+cnt_sd <- sd(running_time)  #standard deviation = variance
+d <- ((cnt_mean - trt_mean) / cnt_sd)  #d for power analysis
+cnt_mean
+trt_mean
+cnt_sd
+d
+```
+
+
+> Running Power Analyses
+```{r}
+pwr.t.test(n = NULL, d = d, sig.level = 0.05, power = 0.80, type = "one.sample", 
+           alternative = "two.sided")
+```
+
+```{r}
+pwr.t.test(n = NULL, d = d, sig.level = 0.01, power = 0.80, type = "one.sample", 
+           alternative = "two.sided")
+```
+
+```{r}
+pwr.t.test(n = NULL, d = d, sig.level = 0.05, power = 0.90, type = "one.sample", 
+           alternative = "two.sided")
+```
+
+```{r}
+pwr.t.test(n = NULL, d = d, sig.level = 0.01, power = 0.90, type = "one.sample",
+           alternative = "two.sided")
+```
+
+> Tried a couple of different effect sizes (d). An effect of 0.5 (50%) gave a 
+sample size of 3, which seemed very small. An effect size of 0.1 (10%) gave a 
+sample size of 32. An effect size of 0.15 (15%) gave a sample size of 15. These 
+different effect sizes show me that I would like a sample size of at least 10, 
+and up to possibly 30, depending on how variable the lizards are running on the 
+substrates. 
+> I changed the significance level and power level in the power analyses above
+to get a broader sense of what type of sample size I would need depending on 
+how rigorous I wanted my analysis to be. The lower the significance level and 
+the higher the power, the greater sample size required.

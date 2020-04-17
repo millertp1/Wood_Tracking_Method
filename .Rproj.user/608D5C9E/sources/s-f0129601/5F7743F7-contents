@@ -1,0 +1,82 @@
+git config --global user.email "millertp1@g.cofc.edu"
+BoardCondition3 <- (m = Ci != Ri = Rs)
+git config --global user.email "millertp1@g.cofc.edu"
+install.packages(global)
+install.packages("devtools")
+install.packages("global")
+install.packages("global")
+LogCondition1 <- (m = Ci = Si)
+library(readxl)
+Accepted_microtag <- read_excel("data/Accepted_microtag.xlsx")
+View(Accepted_microtag)
+library(readxl)
+Accepted_microtag <- read_excel("data/Accepted_microtag.xlsx")
+View(Accepted_microtag)
+library(readxl)
+Microtag_data <- read_excel("data/Microtag_data.xlsx")
+View(Microtag_data)
+View(Microtag_data)
+Microtag_data <- read_excel("data/Microtag_data.xlsx")
+Mtdat <- read_excel("data/Microtag_data.xlsx")
+M <-Mtdat$M
+aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+aM <-aMtdat$aM
+M <-Mtdat$M
+aM <-aMtdat$aM
+Ci <- Mtdat$Ci
+aCi <- aMtdat$aCi
+Si <- Mtdat$Si
+aSi <aMtdat$aSi
+aSi <aMtdat$aSi
+View(Accepted_microtag)
+library(readxl)
+Accepted_microtag <- read_excel("data/Accepted_microtag.xlsx")
+View(Accepted_microtag)
+aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+View(aMtdat)
+aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+Mtdat <- read_excel("data/Microtag_data.xlsx")
+rm(Accepted_microtag)
+(Microtag_data)
+aMtdat <- read_excel("data/Accepted_microtag.xlsx")
+Mtdat <- read_excel("data/Microtag_data.xlsx")
+M <-Mtdat$M
+aM <-aMtdat$aM
+Ci <- Mtdat$Ci
+aCi <- aMtdat$aCi
+Si <- Mtdat$Si
+aSi <aMtdat$aSi
+aSi <- aMtdat$aSi
+if (M == aM){
+print ("Accepted Microtag")
+} else {
+print ("Not Accepted")
+}
+if (Ci == aCi){
+print ("Accepted Criteria")
+} else {
+print ("Not Accepted Criteria")
+}
+(Mtdat$M)
+aM <- as.factor(aMtdat$aM)
+Ci <- as.factor(Mtdat$Ci)
+aCi <- as.factor(aMtdat$aCi)
+Si <- as.factor(Mtdat$Si)
+aSi <- as.factor(aMtdat$aSi)
+if (Si == aSi){
+print ("Accepted Supplier Identifier")
+} else {
+print ("Not Accepted")
+}
+if (M == aM){
+print ("Accepted Microtag")
+} else {
+print ("Not Accepted")
+}
+C<- ifelse(M == aM, "Accepted Microtag", "Not Accepted")
+ifelse(Mtdat[Mtdat$M] == aM, "Accepted Microtag", "Not Accepted")
+ifelse(Mtdat[Mtdat$M] == aMtdat[aMtdat$aM], "Accepted Microtag", "Not Accepted")
+ifelse(Mtdat[Mtdat$M] == aMtdat[aMtdat$aM], "Accepted Microtag", "Not Accepted")
+ifelse(Mtdat[Mtdat$M] == RGY, "Accepted Microtag", "Not Accepted")
+rm(C)
+rm(Microtag_data)

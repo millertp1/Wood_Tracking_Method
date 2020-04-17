@@ -1,0 +1,36 @@
+pairs(heart[,-c(5,10)],pch=19,col=heart$chd+3)
+par(mfrow=c(1,9)) # puts all eight plots side-by-side
+boxplot(sbp~chd,data=heart,pch=19,col=14)
+boxplot(tobacco~chd,data=heart,pch=19,col=7)
+boxplot(ldl~chd,data=heart,pch=19,col=28)
+boxplot(adiposity~chd,data=heart,pch=19,col=15)
+boxplot(typea~chd,data=heart,pch=19,col=2)
+boxplot(obesity~chd,data=heart,pch=19,col=4)
+boxplot(as.factor(famhist)~chd,data=heart,pch=19,col=2)
+boxplot(alcohol~chd,data=heart,pch=19,col=11)
+boxplot(age~chd,data=heart,pch=19,col=6)
+
+heart.mod<-glm(chd~sbp+tobacco+ldl+adiposity+typea+obesity+alcohol+age+ as.factor(famhist), data=heart,family=binomial)
+summary(heart.mod)
+
+heart.mod2<-step(heart.mod,scope=)
+heart.mod2
+summary(heart.mod2)
+
+anova(heart.mod2,heart.mod,test="Chisq")
+install.packages("car")
+install.packages("car")
+library(car)
+mmps(heart.mod2,key=T,pch=19)
+pairs(heart[,-c(5,10)],pch=19,col=heart$chd+3)
+
+install.packages("generalhoslem")
+library(generalhoslem)
+h.gof<-logitgof(heart$chd,fitted(heart.mod2),5)
+h.gof
+round(h.gof$expected,3)
+h.gof$observed
+h.Model<-ifelse(predict(heart.mod2,type="response")>0.5,"CHD","No CHD")
+table(h.Model,heart$chd)
+(87+256)/(73+256+46+87)
+
