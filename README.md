@@ -8,7 +8,7 @@ Pseudo-algorithm: If the microtaggant QR code matches with the input criteria an
 
 The pseudo-algorithm blockchain execution is illustrated and stored in the figures folder.
 
-All data scans and criteria keys were simulated and can be modified for useer prefrence for represnting variables and crieria
+All data scans and criteria keys were simulated and can be modified for user prefrence for represnting variables and criteria
 
 1.	Trees in a certified forest are harvested. The ends of the logs are tagged with a QR code using a stencil and microtaggant paint. The QR code will house tree location, season, and species. This will act as the certification necessary to create the log token.
 
